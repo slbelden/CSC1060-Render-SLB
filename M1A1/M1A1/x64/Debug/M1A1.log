@@ -1,0 +1,8 @@
+﻿  M1A1.cpp
+C:\Users\belde\GitHub\CSC1060\M1A1\M1A1\M1A1.cpp(16,46): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\belde\GitHub\CSC1060\M1A1\M1A1\M1A1.cpp(25,30): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\belde\GitHub\CSC1060\M1A1\M1A1\M1A1.cpp(39,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\belde\GitHub\CSC1060\M1A1\M1A1\M1A1.cpp(47,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\belde\GitHub\CSC1060\M1A1\M1A1\M1A1.cpp(48,26): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\belde\GitHub\CSC1060\M1A1\M1A1\M1A1.cpp(63,49): warning C4305: 'initializing': truncation from 'double' to 'float'
+  M1A1.vcxproj -> C:\Users\belde\GitHub\CSC1060\M1A1\x64\Debug\M1A1.exe
