@@ -3,23 +3,25 @@
 // 2023-07-08
 // Stephen L. Belden
 
-// This project is organized using a structural design. With only a few
+// This project is organized using an OOP structural design. With a few
 // modifications, it closely matches the UML Class Diagram from the previous
 // assignment.
 
 // Please note, because the Submission Instructions request a single .cpp file,
 // all classes are be defined before main(). In the final solution, classes
-// will be well-organized into their own files.
+// will be well-organized into their own files. main() starts on Line 410.
 
 // List of control structures for iteration and processing:
-//  1. File Input - Line 173
+//  1. File Input - Line 175
 //      * No return, result is accessed through class function
-//  2. Triangle Sorting - Line 283
+//  2. Triangle Sorting - Line 285
 //      * Result is passed on to Projection
-//  3. Projection - Line 312
+//  3. Projection - Line 317
 //      * Result is passed on to Rasterization
-//  4. Rasterization - Line 348
-//      * Result is used in the final file output
+//  4. Rasterization - Line 356
+//      * Result is used in file output
+//  5. File Output - Line 383
+//      * Result is the final step, the program ends after output
 
 
 
@@ -290,6 +292,9 @@ public:
             // Insert the triangle into depthSortedTris based on it's depth,
             // maintaining the sorted order of that list as triangles are
             // inserted.
+
+        // Temp: for demonstration
+        std::cout << "Sorting..." << std::endl;
     }
 
     // Result access function
@@ -325,6 +330,9 @@ public:
                 // Store the result in a Point2d.
             // Store the three Point2d objects in a Triangle2d.
             // Add each Triangle2d to projectedPointsList.
+
+        // Temp: for demonstration
+        std::cout << "Projecting..." << std::endl;
     }
 
     // Result access function
@@ -359,11 +367,43 @@ public:
                         // at the current coordinates to the random color for
                         // this Triangle.
                         // If they do not intersect, do nothing.
+
+        // Temp: for demonstration
+        std::cout << "Rasterizing..." << std::endl;
     }
 
     // Result access function
     RasterGrid getRasterizedGrid() {
         return result;
+    }
+
+    // Final output function
+    void saveToBMP(std::string outfile)
+    {
+        // This is where the rasterized data will be saved to a file
+
+        // First, check that outfile is a valid filename, and that it can be
+        // written to. If not, assert an error.
+
+        // Open the file at outfile for writing.
+        // Write the BMP header to the file.
+            // Most of the header is fixed.
+            // A few bytes represent the height and width of the image.
+
+        // In a loop, for every column in the result RasterGrid:
+            // In a loop, for every row in the result RasterGrid:
+                // Convert the int value of the current cell of the grid to
+                // R, G and B colors. This can be done by mapping a subset of
+                // integer values (such as 0 - 255) to a set of colors.
+                // The specific color is not important, as what matters
+                // is that each value has the same unique color.
+                // Append the R, G, and B bytes to the output file.
+            // At the end of each row, if the number of bytes written is not
+            // divisible by 4, add blank (all zero) bytes to the file
+            // until the number of bytes in the row is divisible by 4.
+
+        // Temp: for demonstration
+        std::cout << "Writing to file..." << std::endl;
     }
 };
 
@@ -378,19 +418,27 @@ int main()
     double cameraRotY;
     double cameraRotZ;
 
+    int width;
+    int height;
+
     std::string inputOBJ;
     std::string outputBMP;
+
+    // fixed constants
+    int pixelScale = 0.001;
 
     // get input from user
     std::cout << "SLB Software Rasterizer" << std::endl << std::endl;
 
-    std::cout << "Provide camera position as three floating point numbers." << std::endl;
+    std::cout << "Provide camera position as three floating point numbers."
+        << std::endl;
     std::cout << "X, Y, Z, separated by blanks (eg: 0.0 10.0 2.0): ";
     std::cin >> cameraPosX >> cameraPosY >> cameraPosZ;
     std::cout << std::endl;
 
-    std::cout << "Provide camera rotation as three floating point numbers." << std::endl;
-    std::cout << "X, Y, Z, separated by blanks (eg: 0.0 0.1 0.0): ";
+    std::cout << "Provide camera rotation as three floating point numbers."
+        << std::endl;
+    std::cout << "X, Y, Z, separated by blanks (eg: 0.0 1.0 -0.2): ";
     std::cin >> cameraRotX >> cameraRotY >> cameraRotZ;
     std::cout << std::endl;
 
@@ -402,22 +450,43 @@ int main()
     std::cin >> outputBMP;
     std::cout << std::endl;
 
+    std::cout << "Provide the width and height of the output image in pixels"
+        << std::endl;
+    std::cout << "as two integer values, separated by a blank (eg: 640 480): ";
+    std::cin >> width >> height;
+    std::cout << std::endl;
+
     // construct objects from input
     Point3d cameraPos = Point3d(cameraPosX, cameraPosY, cameraPosZ);
     Point3d cameraRot = Point3d(cameraRotX, cameraRotY, cameraRotZ);
     Camera3d camera = Camera3d(cameraPos, cameraRot);
     Object3d object = Object3d(inputOBJ);
+    RasterGrid screen = RasterGrid(width, height, pixelScale);
 
     // summarize variables for this render from constructed objects
     std::cout << "The 3d Object: " << object.getInputFilename() << std::endl;
     std::cout << "Will be rendered to the image: " << outputBMP << std::endl;
+    std::cout << "With the resolution (w by h): " << screen.getWidth() 
+        << " by " << screen.getHeight() << std::endl;
+    std::cout << std::showpoint;
     std::cout << "With a camera located at (X, Y, Z): "
         << camera.getPosition().getX() << " "
         << camera.getPosition().getY() << " "
         << camera.getPosition().getZ() << std::endl;
-    std::cout << "and looking in the direction of (X, Y, Z): "
+    std::cout << "looking in the direction of (X, Y, Z): "
         << camera.getRotation().getX() << " "
         << camera.getRotation().getY() << " "
-        << camera.getRotation().getZ() << std::endl;
+        << camera.getRotation().getZ() << std::endl
+        << std::endl;
 
+    // do the math
+    SortedObject sortObj = SortedObject(object, camera);
+    ProjectedObject projection = ProjectedObject(sortObj, camera);
+    Rasterizer rasterizer = Rasterizer(projection, screen);
+
+    // output the result to a file
+    rasterizer.saveToBMP(outputBMP);
+
+    // Temp: for demonstration
+    std::cout << "Done." << std::endl;
 }
