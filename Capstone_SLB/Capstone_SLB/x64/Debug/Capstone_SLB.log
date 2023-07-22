@@ -1,3 +1,2 @@
 ﻿  Capstone_SLB.cpp
-C:\Users\belde\Repos\CSC1060\Capstone_SLB\Capstone_SLB\Capstone_SLB.cpp(428,20): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  Capstone_SLB.vcxproj -> C:\Users\belde\Repos\CSC1060\Capstone_SLB\x64\Debug\Capstone_SLB.exe
+  Capstone_SLB.vcxproj -> C:\Users\belde\GitHub\CSC1060\Capstone_SLB\x64\Debug\Capstone_SLB.exe

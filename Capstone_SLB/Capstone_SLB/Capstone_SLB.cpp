@@ -1,33 +1,20 @@
 // CSC1060C03
-// M3 Capstone Project: Design-Draft a Program
-// 2023-07-08
+// M4 Capstone Project: Capstone Preparation
+// 2023-07-22
 // Stephen L. Belden
 
-// This project is organized using an OOP structural design. With a few
-// modifications, it closely matches the UML Class Diagram from the previous
-// assignment.
+// This project has been condensed into a single file to adhere to the
+// assignment submission criteria.
 
-// Please note, because the Submission Instructions request a single .cpp file,
-// all classes are be defined before main(). In the final solution, classes
-// will be well-organized into their own files. main() starts on Line 410.
+// Capstone project requirements are commented starting on lines 162 and 453.
 
-// List of control structures for iteration and processing:
-//  1. File Input - Line 175
-//      * No return, result is accessed through class function
-//  2. Triangle Sorting - Line 285
-//      * Result is passed on to Projection
-//  3. Projection - Line 317
-//      * Result is passed on to Rasterization
-//  4. Rasterization - Line 356
-//      * Result is used in file output
-//  5. File Output - Line 383
-//      * Result is the final step, the program ends after output
-
-
-
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cassert>
+
+using namespace std;
 
 // Class for storing and using a point in 3d space.
 // This class is also used for rotation, because a separate rotation class
@@ -162,33 +149,87 @@ public:
 class Object3d
 {
 private:
-    std::string filename;
-    std::vector<Triangle3d> triList;
+    string filename;
+    vector<Triangle3d> triList;
 
 public:
     // A 3d object is always constructed from a file.
     // A 3d object can not be modified after it has been created.
-    Object3d(std::string inFile)
+    Object3d(string inFile)
     {
         filename = inFile;
 
-        // This is where a .obj file will be read
+        // local variable declarations
+        // Capstone Requirement 4 - Variables
+        string line;
+        vector<Point3d> verts;
+        vector<Triangle3d> tris;
 
-        // First, try to open the file, and assert an error if that fails
+        // open file
+        // Capstone Requirement 6 - File I/O
+        ifstream objFile;
+        objFile.open(filename.c_str());
+
+        // check for valid file
+        assert(objFile.is_open());
+
+        // process until end of file
+        // Capstone Requirement 7 - Iteration (loops)
+        while (!objFile.eof())
+        {
+            // read the first character of the line
+            char next = '#';
+            objFile.get(next);
+
+            // The first character of a line determines what it defines,
+            // v for vertex and f for face. Other lines are ignored.
+            // Capstone Requirement 9 - Control
+            if (next == 'v')
+            {
+                // read vertex coordinates into a new Point3d object
+                // Capstone Requirement 3 - Input
+                double x, y, z;
+                objFile >> x >> y >> z;
+                Point3d newPoint(x, y, z);
+
+                // add the new vertex to the array
+                // Capstone Requirement 5 - Arrays
+                verts.push_back(newPoint);
+            }
+            else if (next == 'f')
+            {
+                // read vertex numbers
+                // Capstone Requirement 3 - Input
+                int a, b, c;
+                objFile >> a >> b >> c;
+                
+                // Lookup the vertices in the array, and create a new
+                // Triangle3d object. Because .obj files start with index 1
+                // instead of 0, we subtract 1 during array access.
+                // Capstone Requirement 5 - Arrays
+                Triangle3d newTri(verts[a - 1], verts[b - 1], verts[c - 1]);
+
+                // add the new triangle to the array
+                tris.push_back(newTri);
+            }
+
+            // after processing, clear the line from input stream
+            string discard;
+            getline(objFile, discard);
+        }
         
-        // In a loop, get a line from the .obj file until end-of-file.
-            // If the line starts with an #, ignore it and go to the next line
-            // If the line starts with a v, parse 3 numbers into a Point3d
-            // If the line starts with a f, parse 3 numbers, then
-            // create a Triangle3d from the three points specified
+        // Print some info messages
+        // Capstone Requirement 3 - Output
+        cout << "Loaded " << verts.size() << " vertices." << endl;
+        cout << "Loaded " << tris.size() << " triangles." << endl;
     }
 
-    std::vector<Triangle3d> getTriList()
+    vector<Triangle3d> getTriList()
     {
         return triList;
     }
 
-    std::string getInputFilename()
+    string getInputFilename()
     {
         return filename;
     }
@@ -228,7 +269,7 @@ private:
     int iwidth;
     int iheight;
     double ipixelScale;
-    std::vector<std::vector<int>> values;
+    vector<vector<int>> values;
 
 public:
     // Constructor specifies width, height, and scale, which can not be changed
@@ -275,7 +316,7 @@ public:
 class SortedObject
 {
 private:
-    std::vector<Triangle3d> depthSortedTris;
+    vector<Triangle3d> depthSortedTris;
 
 public:
     // The functionality of this class is implemented in its constructor,
@@ -294,11 +335,11 @@ public:
             // inserted.
 
         // Temp: for demonstration
-        std::cout << "Sorting..." << std::endl;
+        cout << "Sorting..." << endl;
     }
 
     // Result access function
-    std::vector<Triangle3d> getDepthSortedTris() {
+    vector<Triangle3d> getDepthSortedTris() {
         return depthSortedTris;
     }
 };
@@ -307,7 +348,7 @@ public:
 class ProjectedObject
 {
 private:
-    std::vector<Point2d> projectedPointsList;
+    vector<Point2d> projectedPointsList;
 
 public:
     // The functionality of this class is implemented in its constructor,
@@ -332,11 +373,11 @@ public:
             // Add each Triangle2d to projectedPointsList.
 
         // Temp: for demonstration
-        std::cout << "Projecting..." << std::endl;
+        cout << "Projecting..." << endl;
     }
 
     // Result access function
-    std::vector<Point2d> getProjectedTris()
+    vector<Point2d> getProjectedTris()
     {
         return projectedPointsList;
     }
@@ -369,7 +410,7 @@ public:
                         // If they do not intersect, do nothing.
 
         // Temp: for demonstration
-        std::cout << "Rasterizing..." << std::endl;
+        cout << "Rasterizing..." << endl;
     }
 
     // Result access function
@@ -378,7 +419,7 @@ public:
     }
 
     // Final output function
-    void saveToBMP(std::string outfile)
+    void saveToBMP(string outfile)
     {
         // This is where the rasterized data will be saved to a file
 
@@ -403,13 +444,14 @@ public:
             // until the number of bytes in the row is divisible by 4.
 
         // Temp: for demonstration
-        std::cout << "Writing to file..." << std::endl;
+        cout << "Writing to file..." << endl;
     }
 };
 
 int main()
 {
     // variable declarations
+    // Capstone Requirement 4 - Variables
     double cameraPosX;
     double cameraPosY;
     double cameraPosZ;
@@ -421,40 +463,40 @@ int main()
     int width;
     int height;
 
-    std::string inputOBJ;
-    std::string outputBMP;
+    string inputOBJ;
+    string outputBMP;
 
     // fixed constants
-    int pixelScale = 0.001;
+    double pixelScale = 0.001;
 
     // get input from user
-    std::cout << "SLB Software Rasterizer" << std::endl << std::endl;
+    // Capstone Requirement 3 - Input
+    // Capstone Requirement 8 - Interaction
+    cout << "SLB Software Rasterizer" << endl << endl;
 
-    std::cout << "Provide camera position as three floating point numbers."
-        << std::endl;
-    std::cout << "X, Y, Z, separated by blanks (eg: 0.0 10.0 2.0): ";
-    std::cin >> cameraPosX >> cameraPosY >> cameraPosZ;
-    std::cout << std::endl;
+    cout << "Provide camera position as three floating point numbers." << endl;
+    cout << "X, Y, Z, separated by blanks (eg: 0.0 10.0 2.0): ";
+    cin >> cameraPosX >> cameraPosY >> cameraPosZ;
+    cout << endl;
 
-    std::cout << "Provide camera rotation as three floating point numbers."
-        << std::endl;
-    std::cout << "X, Y, Z, separated by blanks (eg: 0.0 1.0 -0.2): ";
-    std::cin >> cameraRotX >> cameraRotY >> cameraRotZ;
-    std::cout << std::endl;
+    cout << "Provide camera rotation as three floating point numbers." << endl;
+    cout << "X, Y, Z, separated by blanks (eg: 0.0 1.0 -0.2): ";
+    cin >> cameraRotX >> cameraRotY >> cameraRotZ;
+    cout << endl;
 
-    std::cout << "Provide the filename of the input .obj file: ";
-    std::cin >> inputOBJ;
-    std::cout << std::endl;
+    cout << "Provide the filename of the input .obj file: ";
+    cin >> inputOBJ;
+    cout << endl;
 
-    std::cout << "Provide a name for the .bmp file to output: ";
-    std::cin >> outputBMP;
-    std::cout << std::endl;
+    cout << "Provide a name for the .bmp file to output: ";
+    cin >> outputBMP;
+    cout << endl;
 
-    std::cout << "Provide the width and height of the output image in pixels"
-        << std::endl;
-    std::cout << "as two integer values, separated by a blank (eg: 640 480): ";
-    std::cin >> width >> height;
-    std::cout << std::endl;
+    cout << "Provide the width and height of the output image in pixels"
+        << endl;
+    cout << "as two integer values, separated by a blank (eg: 640 480): ";
+    cin >> width >> height;
+    cout << endl;
 
     // construct objects from input
     Point3d cameraPos = Point3d(cameraPosX, cameraPosY, cameraPosZ);
@@ -464,29 +506,30 @@ int main()
     RasterGrid screen = RasterGrid(width, height, pixelScale);
 
     // summarize variables for this render from constructed objects
-    std::cout << "The 3d Object: " << object.getInputFilename() << std::endl;
-    std::cout << "Will be rendered to the image: " << outputBMP << std::endl;
-    std::cout << "With the resolution (w by h): " << screen.getWidth() 
-        << " by " << screen.getHeight() << std::endl;
-    std::cout << std::showpoint;
-    std::cout << "With a camera located at (X, Y, Z): "
+    // Capstone Requirement 3 - Output
+    cout << endl << "The 3d Object: " << object.getInputFilename() << endl;
+    cout << "Will be rendered to the image: " << outputBMP << endl;
+    cout << "With the resolution (w by h): " << screen.getWidth() 
+        << " by " << screen.getHeight() << endl;
+    cout << showpoint;
+    cout << "With a camera located at (X, Y, Z): "
         << camera.getPosition().getX() << " "
         << camera.getPosition().getY() << " "
-        << camera.getPosition().getZ() << std::endl;
-    std::cout << "looking in the direction of (X, Y, Z): "
+        << camera.getPosition().getZ() << endl;
+    cout << "looking in the direction of (X, Y, Z): "
         << camera.getRotation().getX() << " "
         << camera.getRotation().getY() << " "
-        << camera.getRotation().getZ() << std::endl
-        << std::endl;
+        << camera.getRotation().getZ() << endl
+        << endl;
 
-    // do the math
+    // do the math (not yet implemented)
     SortedObject sortObj = SortedObject(object, camera);
     ProjectedObject projection = ProjectedObject(sortObj, camera);
     Rasterizer rasterizer = Rasterizer(projection, screen);
 
-    // output the result to a file
+    // output the result to a file (not yet implemented)
     rasterizer.saveToBMP(outputBMP);
 
     // Temp: for demonstration
-    std::cout << "Done." << std::endl;
+    cout << "Done." << endl;
 }
