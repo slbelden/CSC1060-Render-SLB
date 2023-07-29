@@ -8,11 +8,13 @@
 
 // Capstone project requirements are commented starting on lines 162 and 453.
 
+#include <cassert>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
+#include <map>
 #include <string>
 #include <vector>
-#include <cassert>
 
 using namespace std;
 
@@ -163,7 +165,6 @@ public:
         // Capstone Requirement 4 - Variables
         string line;
         vector<Point3d> verts;
-        vector<Triangle3d> tris;
 
         // open file
         // Capstone Requirement 6 - File I/O
@@ -210,7 +211,7 @@ public:
                 Triangle3d newTri(verts[a - 1], verts[b - 1], verts[c - 1]);
 
                 // add the new triangle to the array
-                tris.push_back(newTri);
+                triList.push_back(newTri);
             }
 
             // after processing, clear the line from input stream
@@ -221,7 +222,7 @@ public:
         // Print some info messages
         // Capstone Requirement 3 - Output
         cout << "Loaded " << verts.size() << " vertices." << endl;
-        cout << "Loaded " << tris.size() << " triangles." << endl;
+        cout << "Loaded " << triList.size() << " triangles." << endl;
     }
 
     vector<Triangle3d> getTriList()
@@ -323,19 +324,58 @@ public:
     // the class is intended to be instantiated and immediately used.
     SortedObject(Object3d object, Camera3d camera)
     {
-        // This is where triangles will be sorted
+        // parallel array alongside vector<Triangle3d> depthSortedTris;
+        vector<double> triDepths;
 
-        // In a loop, for each Triangle3d in object, until all tris are read:
-            // Calculate the average position of the triangle by averaging its
-            // three coordinates.
-            // Calculate the distance between that average and the position of
-            // the camera, this is the value considered the "depth".
-            // Insert the triangle into depthSortedTris based on it's depth,
-            // maintaining the sorted order of that list as triangles are
-            // inserted.
+        for (Triangle3d tri : object.getTriList())
+        {
+            // calculate average position of triangle's verticies
+            double xAvg = (tri.getVert1().getX() + tri.getVert2().getX() + tri.getVert3().getX()) / 3;
+            double yAvg = (tri.getVert1().getY() + tri.getVert2().getY() + tri.getVert3().getY()) / 3;
+            double zAvg = (tri.getVert1().getZ() + tri.getVert2().getZ() + tri.getVert3().getZ()) / 3;
 
-        // Temp: for demonstration
-        cout << "Sorting..." << endl;
+            // calculate distance from camera using 3d Pythagorean theorem
+            double sideX = xAvg - camera.getPosition().getX();
+            double sideY = yAvg - camera.getPosition().getY();
+            double sideZ = zAvg - camera.getPosition().getZ();
+            double hypotenuse = sqrt((sideX * sideX) + (sideY * sideY) + (sideZ * sideZ));
+
+            // add current element to end of parallel lists
+            // this creates room for the insertion sort shifting in the next loop
+            depthSortedTris.push_back(tri);
+            triDepths.push_back(hypotenuse);
+
+            // shift into correct place in list based on calculated distance
+            for (int i = depthSortedTris.size() - 1; i > 0; i--)
+            {
+                // starting at the back of the list, shift deeper elements right
+                // until the proper place for the current element is found
+                if (triDepths[i - 1] > hypotenuse)
+                {
+                    // shift
+                    depthSortedTris[i] = depthSortedTris[i - 1];
+                    triDepths[i] = triDepths[i - 1];
+
+                    // insert
+                    depthSortedTris[i - 1] = tri;
+                    triDepths[i - 1] = hypotenuse;
+                }
+                else
+                {
+                    // element has been moved to is correct place, we're done
+                    break;
+                }
+            }
+        }
+
+        // debug output
+        for (int i = 0; i < triDepths.size(); i++)
+        {
+            cout << setprecision(16) << i << ": " << triDepths[i] << endl;
+        }
+
+        // Progress Output
+        cout << "Sorted " << depthSortedTris.size() << " tris" << endl;
     }
 
     // Result access function
