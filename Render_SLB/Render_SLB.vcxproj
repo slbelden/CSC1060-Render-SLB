@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{bdd0469c-a4f1-49f5-9fb0-7bed74ce5a47}</ProjectGuid>
-    <RootNamespace>CapstoneSLB</RootNamespace>
+    <ProjectGuid>{6a76e653-9804-4afa-9560-2a5a3bf89eb2}</ProjectGuid>
+    <RootNamespace>RenderSLB</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Capstone_SLB.cpp" />
+    <ClCompile Include="Render_SLB.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

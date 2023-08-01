@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Capstone_SLB.cpp">
+    <ClCompile Include="Render_SLB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
