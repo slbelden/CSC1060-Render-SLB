@@ -25,6 +25,7 @@ SortedObject::SortedObject(Object3d object, Camera3d camera)
         // this creates room for the insertion sort shifting in the next loop
         depthSortedTris.push_back(tri);
         triDepths.push_back(hypotenuse);
+        steps++;
 
         // shift into correct place in list based on calculated distance
         for (int i = depthSortedTris.size() - 1; i > 0; i--)
@@ -40,6 +41,9 @@ SortedObject::SortedObject(Object3d object, Camera3d camera)
                 // insert
                 depthSortedTris[i - 1] = tri;
                 triDepths[i - 1] = hypotenuse;
+
+                // count
+                steps++;
             }
             else
             {
@@ -54,4 +58,14 @@ SortedObject::SortedObject(Object3d object, Camera3d camera)
 
 vector<Triangle3d> SortedObject::getDepthSortedTris() {
     return depthSortedTris;
+}
+
+int SortedObject::getSortedTrisCount()
+{
+    return depthSortedTris.size();
+}
+
+int SortedObject::getSortingSteps()
+{
+    return steps;
 }

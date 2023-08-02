@@ -18,6 +18,7 @@ class SortedObject
 {
 private:
     vector<Triangle3d> depthSortedTris;
+    int steps = 0;
 
 public:
     // The functionality of this class is implemented in its constructor,
@@ -26,4 +27,6 @@ public:
 
     // Result access function
     vector<Triangle3d> getDepthSortedTris();
+    int getSortedTrisCount();
+    int getSortingSteps();
 };

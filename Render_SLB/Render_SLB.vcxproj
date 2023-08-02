@@ -134,6 +134,7 @@
     <ClCompile Include="project.cpp" />
     <ClCompile Include="grid.cpp" />
     <ClCompile Include="rasterizer.cpp" />
+    <ClCompile Include="scene.cpp" />
     <ClCompile Include="sort.cpp" />
     <ClCompile Include="triangles.cpp" />
   </ItemGroup>
@@ -144,6 +145,7 @@
     <ClInclude Include="project.h" />
     <ClInclude Include="grid.h" />
     <ClInclude Include="rasterizer.h" />
+    <ClInclude Include="scene.h" />
     <ClInclude Include="sort.h" />
     <ClInclude Include="triangles.h" />
   </ItemGroup>
