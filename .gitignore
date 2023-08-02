@@ -75,6 +75,9 @@ StyleCopReport.xml
 *.ilk
 *.meta
 *.obj
+# Except example 3d obj files in default scenes
+!bunny.obj
+!teapot.obj
 *.iobj
 *.pch
 *.pdb
