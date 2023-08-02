@@ -47,31 +47,31 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="points.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="triangles.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="scene.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="camera.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="object.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="grid.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sort.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="points.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="project.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rasterizer.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene.h">
+    <ClInclude Include="sort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="triangles.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
