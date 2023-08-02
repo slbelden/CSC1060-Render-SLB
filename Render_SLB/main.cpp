@@ -37,10 +37,26 @@ int main()
         640,
         480
     };
+    const sceneDescriptor teapotScene = {
+        // Camera Positions
+        1.0,
+        2.0,
+        3.0,
+        // Camera Rotations
+        4.0,
+        5.0,
+        6.0,
+        // Input file
+        "teapot.obj",
+        // Screen dimensions
+        640,
+        480
+    };
 
     // Begin program
     cout << "SLB Software Rasterizer - CCD.edu CSC1060C03 Capstone Project"
-        << endl;
+        << endl << endl;
+    cout << "Loading default scene, Stanford Bunny..." << endl;
 
     // Interactive terminal menu system
     // Capstone Requirement 3 - Input/Output
@@ -58,7 +74,10 @@ int main()
             break;
 
         case 'T':
+            scene = Scene(teapotScene);
+            printSceneInfo(scene);
             break;
+
         case 'C':
             scene = Scene(buildScene());
             printSceneInfo(scene);
@@ -89,7 +108,6 @@ int main()
 }
 
 // Interactively ask the user for info to build a new scene
-// Capstone Requirement 3 - Input/Output
 sceneDescriptor buildScene()
 {
     sceneDescriptor newScene;
@@ -147,14 +165,17 @@ char menuPrompt()
     cout << "Enter the letter of your choice: ";
 
     cin.get(c);
+
     string discardNewLine;
     getline(cin, discardNewLine);
+
     return toupper(c);
 }
 
 void printSceneInfo(Scene& scene)
 {
-    cout << bunchOfChars('#', 60) << endl;
+    cout << bunchOfChars('#', 24) << " Scene Info "
+        << bunchOfChars('#', 24) << endl;
     cout << scene.getInfoBlockText();
     cout << bunchOfChars('#', 60) << endl;
     cout << endl;
