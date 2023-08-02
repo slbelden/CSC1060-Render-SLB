@@ -3,7 +3,6 @@
 // 2023-08-02
 // Stephen L. Belden
 
-#include <ctype.h>
 #include <iostream>
 
 #include "scene.h"
@@ -96,6 +95,7 @@ int main()
             string discardNewLine;
             getline(cin, discardNewLine);
 
+            // This is the function call that does it all!
             scene.renderToFile(outFile);
         }
             break;
