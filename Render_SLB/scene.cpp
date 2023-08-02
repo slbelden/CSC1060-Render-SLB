@@ -24,6 +24,19 @@ string Scene::getInfoBlockText()
 
 void Scene::renderToFile(string outFile)
 {
+	cout << endl;
+
+	// Check for valid input file
+	if (obj.getTriCount() <= 0)
+	{
+		cout << "ERROR: Nothing to render." << endl;
+		cout << "Input object \"" << obj.getInputFilename() << "\" has no triangles."
+			<< endl;
+		cout << "Is it a valid .obj file? Does the file exist?" << endl;
+		cout << endl;
+		return;
+	}
+
 	// Sort
 	SortedObject sortObj = SortedObject(obj, cam);
 	cout << "Sorted " << sortObj.getSortedTrisCount() <<
@@ -38,4 +51,5 @@ void Scene::renderToFile(string outFile)
 
 	// Output
 	rasterizer.saveToBMP(outFile);
+	cout << endl;
 }

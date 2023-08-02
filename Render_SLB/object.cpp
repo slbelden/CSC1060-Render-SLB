@@ -4,6 +4,7 @@
 
 Object3d::Object3d(string inFile)
 {
+    // set class private variable
     filename = inFile;
 
     // local variable declarations
@@ -17,7 +18,10 @@ Object3d::Object3d(string inFile)
     objFile.open(filename.c_str());
 
     // check for valid file
-    assert(objFile.is_open());
+    if (!objFile.is_open())
+    {
+        return;
+    }
 
     // process until end of file
     // Capstone Requirement 7 - Iteration (loops)
