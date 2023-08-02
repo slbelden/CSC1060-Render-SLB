@@ -12,11 +12,12 @@ class Camera3d
 private:
     Point3d iposition;
     Point3d irotation;
+    double iscale;
 
 public:
     // A camera is created through this constructor.
     // A camera can not be modified after it has been created.
-    Camera3d(Point3d position, Point3d rotation);
+    Camera3d(Point3d position, Point3d rotation, double scale);
 
     // Member access functions
     Point3d getPosition();

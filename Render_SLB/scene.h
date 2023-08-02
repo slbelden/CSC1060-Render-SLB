@@ -30,7 +30,7 @@ struct sceneDescriptor
 	string objName = "";
 	int screenWidth = 640;
 	int screenHeight = 480;
-	double pixelScale = 0.001;
+	double screenScale = 1.0;
 };
 
 class Scene
@@ -45,9 +45,10 @@ public:
 	Scene(sceneDescriptor desc) :
 		cam(Camera3d(
 			Point3d(desc.camPosX, desc.camPosY, desc.camPosZ),
-			Point3d(desc.camRotX, desc.camRotY, desc.camRotZ))),
+			Point3d(desc.camRotX, desc.camRotY, desc.camRotZ),
+			desc.screenScale)),
 		obj(desc.objName),
-		screen(desc.screenWidth, desc.screenHeight, desc.pixelScale)
+		screen(desc.screenWidth, desc.screenHeight, desc.screenScale)
 	{}
 
 	// Return info string for use in menu

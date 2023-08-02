@@ -83,12 +83,12 @@ vector<Triangle3d> Object3d::getTriList()
     return triList;
 }
 
-int Object3d::getVertCount()
+size_t Object3d::getVertCount()
 {
     return vertCount;
 }
 
-int Object3d::getTriCount()
+size_t Object3d::getTriCount()
 {
     return triList.size();
 }

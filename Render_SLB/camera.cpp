@@ -2,8 +2,8 @@
 
 // Camera3d definition
 
-Camera3d::Camera3d(Point3d position, Point3d rotation)
-    : iposition(position), irotation(rotation)
+Camera3d::Camera3d(Point3d position, Point3d rotation, double scale)
+    : iposition(position), irotation(rotation), iscale(scale)
 {
 }
 

@@ -32,9 +32,10 @@ int main()
         6.0,
         // Input file
         "bunny.obj",
-        // Screen dimensions
+        // Screen dimensions and scale
         640,
-        480
+        480,
+        1.0
     };
     const sceneDescriptor teapotScene = {
         // Camera Positions
@@ -47,9 +48,10 @@ int main()
         6.0,
         // Input file
         "teapot.obj",
-        // Screen dimensions
+        // Screen dimensions and scale
         640,
-        480
+        480,
+        1.0
     };
 
     // Begin program

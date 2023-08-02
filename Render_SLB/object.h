@@ -18,7 +18,7 @@ using namespace std;
 class Object3d
 {
 private:
-    int vertCount = 0;
+    size_t vertCount = 0;
     string filename;
     vector<Triangle3d> triList;
 
@@ -30,6 +30,6 @@ public:
     // Data access functions
     string getInputFilename();
     vector<Triangle3d> getTriList();
-    int getVertCount();
-    int getTriCount();
+    size_t getVertCount();
+    size_t getTriCount();
 };

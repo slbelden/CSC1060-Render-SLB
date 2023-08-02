@@ -28,7 +28,7 @@ SortedObject::SortedObject(Object3d object, Camera3d camera)
         steps++;
 
         // shift into correct place in list based on calculated distance
-        for (int i = depthSortedTris.size() - 1; i > 0; i--)
+        for (size_t i = depthSortedTris.size() - 1; i > 0; i--)
         {
             // starting at the back of the list, shift deeper elements right
             // until the proper place for the current element is found
@@ -60,7 +60,7 @@ vector<Triangle3d> SortedObject::getDepthSortedTris() {
     return depthSortedTris;
 }
 
-int SortedObject::getSortedTrisCount()
+size_t SortedObject::getSortedTrisCount()
 {
     return depthSortedTris.size();
 }

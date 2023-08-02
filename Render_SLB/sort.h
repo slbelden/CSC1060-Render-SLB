@@ -27,6 +27,6 @@ public:
 
     // Result access function
     vector<Triangle3d> getDepthSortedTris();
-    int getSortedTrisCount();
+    size_t getSortedTrisCount();
     int getSortingSteps();
 };
