@@ -78,8 +78,8 @@ int main()
 
     // Print some info messages
     // Capstone Requirement 3 - Output
-    cout << "Loaded " << object.getTriList().size() * 3 << " vertices." << endl;
-    cout << "Loaded " << object.getTriList().size() << " triangles." << endl;
+    cout << "Loaded " << object.getVertCount() << " vertices." << endl;
+    cout << "Loaded " << object.getTriCount() << " triangles." << endl;
 
     // summarize variables for this render from constructed objects
     // Capstone Requirement 3 - Output

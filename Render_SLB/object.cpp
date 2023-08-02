@@ -63,6 +63,15 @@ Object3d::Object3d(string inFile)
         string discard;
         getline(objFile, discard);
     }
+
+    // set internal vertex counter,
+    // since this information will be lost out of this scope
+    vertCount = verts.size();
+}
+
+string Object3d::getInputFilename()
+{
+    return filename;
 }
 
 vector<Triangle3d> Object3d::getTriList()
@@ -70,7 +79,13 @@ vector<Triangle3d> Object3d::getTriList()
     return triList;
 }
 
-string Object3d::getInputFilename()
+int Object3d::getVertCount()
 {
-    return filename;
+    return vertCount;
 }
+
+int Object3d::getTriCount()
+{
+    return triList.size();
+}
+
