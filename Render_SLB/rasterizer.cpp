@@ -11,9 +11,7 @@ int Rasterizer::writeHeader(ofstream& bmpFile)
     const char B = 'B';
     const char M = 'M';
     bmpFile.write((char*)&B, sizeof(uint8_t));
-    bmpFile.flush();
     bmpFile.write((char*)&M, sizeof(uint8_t));
-    bmpFile.flush();
 
     // Bitmap file size in bytes
     const uint32_t bytesInHeader = 54;
@@ -21,60 +19,46 @@ int Rasterizer::writeHeader(ofstream& bmpFile)
     uint32_t bytesInBody = result.getWidth() * result.getHeight() * bytesPerPixel;
     uint32_t size = bytesInHeader + bytesInBody;
     bmpFile.write((char*)&size, sizeof(uint32_t));
-    bmpFile.flush();
 
     // Data offset information
     uint32_t reservedBytes = 0;
     bmpFile.write((char*)&reservedBytes, sizeof(uint32_t));
-    bmpFile.flush();
     uint32_t offset = bytesInHeader;
     bmpFile.write((char*)&offset, sizeof(uint32_t));
-    bmpFile.flush();
 
     // Info header section
     const uint32_t sizeOfInfoHeader = 40;
     bmpFile.write((char*)&sizeOfInfoHeader, sizeof(uint32_t));
-    bmpFile.flush();
 
     // Image dimensions
     int32_t width = result.getWidth();
     int32_t height = result.getHeight();
     bmpFile.write((char*)&width, sizeof(int32_t));
-    bmpFile.flush();
     bmpFile.write((char*)&height, sizeof(int32_t));
-    bmpFile.flush();
 
     // Color settings
     const uint16_t numberOfColorPlanes = 1; // must be 1
     const uint16_t colorDepth = 24; // 3 byes per pixel
     bmpFile.write((char*)&numberOfColorPlanes, sizeof(uint16_t));
-    bmpFile.flush();
     bmpFile.write((char*)&colorDepth, sizeof(uint16_t));
-    bmpFile.flush();
 
     // Image data settings
     const uint32_t compressionMethod = 0; // no compression
     const uint32_t rawBitmapDataSize = 0; // generally ignored
     bmpFile.write((char*)&compressionMethod, sizeof(uint32_t));
-    bmpFile.flush();
     bmpFile.write((char*)&rawBitmapDataSize, sizeof(uint32_t));
-    bmpFile.flush();
 
     // Real-world size (for printing)
     const int32_t horizontalResolution = 3780; // in pixel per meter
     const int32_t verticalResolution = 3780; // in pixel per meter
     bmpFile.write((char*)&horizontalResolution, sizeof(int32_t));
-    bmpFile.flush();
     bmpFile.write((char*)&verticalResolution, sizeof(int32_t));
-    bmpFile.flush();
 
     // Color palate lookup table information (unused)
     const uint32_t colorTableEntries = 0; // not used in this implementation
     const uint32_t importantColors = 0; // not used in this implementation
     bmpFile.write((char*)&colorTableEntries, sizeof(uint32_t));
-    bmpFile.flush();
     bmpFile.write((char*)&importantColors, sizeof(uint32_t));
-    bmpFile.flush();
 
     return bytesInHeader;
 }
@@ -85,9 +69,9 @@ int Rasterizer::writePixels(ofstream& bmpFile)
     int numberOfPixels = result.getWidth() * result.getHeight();
     for (int i = 0; i < numberOfPixels; i++)
     {
-        char red = 'R';
-        char gre = 'G';
-        char blu = 'B';
+        char red = 100;
+        char gre = 200;
+        char blu = 255;
         bmpFile.write((char*)&red, sizeof(uint8_t));
         bmpFile.write((char*)&gre, sizeof(uint8_t));
         bmpFile.write((char*)&blu, sizeof(uint8_t));

@@ -53,6 +53,8 @@ void Scene::renderToFile(string outFile)
 	Rasterizer rasterizer = Rasterizer(projection, screen);
 
 	// Output
-	rasterizer.saveToBMP(outFile);
+	int bytes = rasterizer.saveToBMP(outFile);
+	cout << "Wrote " << bytes << " bytes to file \"" << outFile << "\"." << endl;
+	cout << "Files are saved in Visual Studio solution folder." << endl;
 	cout << endl;
 }
