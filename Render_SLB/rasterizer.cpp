@@ -2,6 +2,8 @@
 
 // Rasterizer definition
 
+// Private helper functions
+
 // Write BMP header to the file
 // Standard header implementation referenced from:
 // https://dev.to/muiz6/c-how-to-write-a-bitmap-image-from-scratch-1k6m
@@ -69,9 +71,9 @@ int Rasterizer::writePixels(ofstream& bmpFile)
     int numberOfPixels = result.getWidth() * result.getHeight();
     for (int i = 0; i < numberOfPixels; i++)
     {
-        char red = 100;
-        char gre = 200;
-        char blu = 255;
+        unsigned char red = 100u;
+        unsigned char gre = 200u;
+        unsigned char blu = 255u;
         bmpFile.write((char*)&red, sizeof(uint8_t));
         bmpFile.write((char*)&gre, sizeof(uint8_t));
         bmpFile.write((char*)&blu, sizeof(uint8_t));
@@ -79,6 +81,10 @@ int Rasterizer::writePixels(ofstream& bmpFile)
 
     return numberOfPixels * 3;
 }
+
+
+
+// Public functions
 
 Rasterizer::Rasterizer(ProjectedObject input, RasterGrid output) : result(output)
 {
@@ -125,18 +131,6 @@ int Rasterizer::saveToBMP(string outfile)
 
     // Close the file
     bmpFile.close();
-
-    // In a loop, for every column in the result RasterGrid:
-    // In a loop, for every row in the result RasterGrid:
-    // Convert the int value of the current cell of the grid to
-    // R, G and B colors. This can be done by mapping a subset of
-    // integer values (such as 0 - 255) to a set of colors.
-    // The specific color is not important, as what matters
-    // is that each value has the same unique color.
-    // Append the R, G, and B bytes to the output file.
-    // At the end of each row, if the number of bytes written is not
-    // divisible by 4, add blank (all zero) bytes to the file
-    // until the number of bytes in the row is divisible by 4.
 
     return byteCount;
 }

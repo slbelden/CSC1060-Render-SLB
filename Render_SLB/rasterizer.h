@@ -2,7 +2,7 @@
 
 // rasterizer.h
 // Class for rasterizing a projected object into a raster grid
-// 2023-07-31
+// 2023-08-03
 // Stephen L. Belden
 
 #include <cstdint>

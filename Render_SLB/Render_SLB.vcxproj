@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="object.cpp" />
+    <ClCompile Include="pixel.cpp" />
     <ClCompile Include="points.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="project.cpp" />
@@ -141,6 +142,7 @@
   <ItemGroup>
     <ClInclude Include="camera.h" />
     <ClInclude Include="object.h" />
+    <ClInclude Include="pixel.h" />
     <ClInclude Include="points.h" />
     <ClInclude Include="project.h" />
     <ClInclude Include="grid.h" />

@@ -1,6 +1,6 @@
 // CSC1060C03
 // M5 Capstone Project: Final
-// 2023-08-02
+// 2023-08-03
 // Stephen L. Belden
 
 #include <iostream>
@@ -99,8 +99,8 @@ int main()
             break;
 
         default:
-            cout << option;
-            return -1;
+            cout << "Unrecognized option." << endl;
+            cout << endl;
         }
     }    
 }
