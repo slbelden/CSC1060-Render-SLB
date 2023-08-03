@@ -81,18 +81,7 @@ int Rasterizer::writePixels(ofstream& bmpFile)
         }
     }
 
-
-
     int numberOfPixels = result.getWidth() * result.getHeight();
-    for (int i = 0; i < numberOfPixels; i++)
-    {
-        unsigned char red = 100u;
-        unsigned char gre = 200u;
-        unsigned char blu = 255u;
-        bmpFile.write((char*)&red, sizeof(uint8_t));
-        bmpFile.write((char*)&gre, sizeof(uint8_t));
-        bmpFile.write((char*)&blu, sizeof(uint8_t));
-    }
 
     return numberOfPixels * 3;
 }
