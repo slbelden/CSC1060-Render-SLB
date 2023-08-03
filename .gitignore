@@ -78,6 +78,7 @@ StyleCopReport.xml
 # Except example 3d obj files in default scenes
 !bunny.obj
 !teapot.obj
+!onetri.obj
 *.iobj
 *.pch
 *.pdb
