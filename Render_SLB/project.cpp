@@ -12,9 +12,9 @@ ProjectedObject::ProjectedObject(SortedObject input, Camera3d camera)
         for (Triangle3d tri : input.getDepthSortedTris())
         {
             // Project each point of the triangle
-            Point2d newA = Point2d(tri.getVertA().getY(), tri.getVertA().getZ());
-            Point2d newB = Point2d(tri.getVertB().getY(), tri.getVertB().getZ());
-            Point2d newC = Point2d(tri.getVertC().getY(), tri.getVertC().getZ());
+            Point2d newA = Point2d(tri.getVertA().getZ(), tri.getVertA().getY());
+            Point2d newB = Point2d(tri.getVertB().getZ(), tri.getVertB().getY());
+            Point2d newC = Point2d(tri.getVertC().getZ(), tri.getVertC().getY());
 
             // Save projected point into internal private class list
             projectedTris.push_back(Triangle2d(newA, newB, newC));

@@ -34,7 +34,7 @@ int Rasterizer::writeHeader(ofstream& bmpFile)
 
     // Image dimensions
     int32_t width = result.getWidth();
-    int32_t height = result.getHeight() * -1; // negate to draw from top left
+    int32_t height = result.getHeight();
     bmpFile.write((char*)&width, sizeof(int32_t));
     bmpFile.write((char*)&height, sizeof(int32_t));
 

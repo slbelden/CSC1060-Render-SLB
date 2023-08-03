@@ -37,17 +37,17 @@ int main()
     };
     const sceneDescriptor bunnyScene = {
         // Camera Positions
-        1.0,
-        2.0,
-        3.0,
+        0.0,
+        0.0,
+        0.0,
         // Camera Rotation
-        camAxis::Y,
+        camAxis::Z,
         // Input file
         "bunny.obj",
         // Screen dimensions and scale
-        640,
-        480,
-        1.0
+        80,
+        60,
+        0.3
     };
     const sceneDescriptor teapotScene = {
         // Camera Positions
@@ -55,12 +55,12 @@ int main()
         0.0,
         0.0,
         // Camera Rotation
-        camAxis::X,
+        camAxis::Z,
         // Input file
         "teapot.obj",
         // Screen dimensions and scale
-        320,
-        240,
+        80,
+        60,
         6.0
     };
 
