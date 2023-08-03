@@ -5,6 +5,9 @@
 // 2023-07-31
 // Stephen L. Belden
 
+#include <cstdint>
+#include <fstream>
+
 #include "grid.h"
 #include "project.h"
 
@@ -12,6 +15,10 @@ class Rasterizer
 {
 private:
     RasterGrid result;
+
+    // Helper functions for code organization
+    int writeHeader(ofstream& bmpFile);
+    int writePixels(ofstream& bmpFile);
 
 public:
     // The functionality of this class is implemented in its constructor,
@@ -21,6 +28,6 @@ public:
     // Result access function
     RasterGrid getRasterizedGrid();
 
-    // Final output function
-    void saveToBMP(string outfile);
+    // Final output function, returns number of bytes written
+    int saveToBMP(string outfile);
 };

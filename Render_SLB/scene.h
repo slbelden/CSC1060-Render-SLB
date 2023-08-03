@@ -41,8 +41,7 @@ private:
 public:
 	// Construct immutable Scene from sceneDescriptor
 	Scene(sceneDescriptor desc) :
-		cam(Camera3d(
-			Point3d(desc.camPosX, desc.camPosY, desc.camPosZ),
+		cam(Camera3d(Point3d(desc.camPosX, desc.camPosY, desc.camPosZ),
 			desc.camRot, desc.screenScale)),
 		obj(desc.objName),
 		screen(desc.screenWidth, desc.screenHeight, desc.screenScale)

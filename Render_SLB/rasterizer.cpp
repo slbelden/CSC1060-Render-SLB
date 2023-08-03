@@ -2,6 +2,100 @@
 
 // Rasterizer definition
 
+// Write BMP header to the file
+// Standard header implementation referenced from:
+// https://dev.to/muiz6/c-how-to-write-a-bitmap-image-from-scratch-1k6m
+int Rasterizer::writeHeader(ofstream& bmpFile)
+{
+    // Bitmap signature bytes
+    const char B = 'B';
+    const char M = 'M';
+    bmpFile.write((char*)&B, sizeof(uint8_t));
+    bmpFile.flush();
+    bmpFile.write((char*)&M, sizeof(uint8_t));
+    bmpFile.flush();
+
+    // Bitmap file size in bytes
+    const uint32_t bytesInHeader = 54;
+    const uint32_t bytesPerPixel = 3;
+    uint32_t bytesInBody = result.getWidth() * result.getHeight() * bytesPerPixel;
+    uint32_t size = bytesInHeader + bytesInBody;
+    bmpFile.write((char*)&size, sizeof(uint32_t));
+    bmpFile.flush();
+
+    // Data offset information
+    uint32_t reservedBytes = 0;
+    bmpFile.write((char*)&reservedBytes, sizeof(uint32_t));
+    bmpFile.flush();
+    uint32_t offset = bytesInHeader;
+    bmpFile.write((char*)&offset, sizeof(uint32_t));
+    bmpFile.flush();
+
+    // Info header section
+    const uint32_t sizeOfInfoHeader = 40;
+    bmpFile.write((char*)&sizeOfInfoHeader, sizeof(uint32_t));
+    bmpFile.flush();
+
+    // Image dimensions
+    int32_t width = result.getWidth();
+    int32_t height = result.getHeight();
+    bmpFile.write((char*)&width, sizeof(int32_t));
+    bmpFile.flush();
+    bmpFile.write((char*)&height, sizeof(int32_t));
+    bmpFile.flush();
+
+    // Color settings
+    const uint16_t numberOfColorPlanes = 1; // must be 1
+    const uint16_t colorDepth = 24; // 3 byes per pixel
+    bmpFile.write((char*)&numberOfColorPlanes, sizeof(uint16_t));
+    bmpFile.flush();
+    bmpFile.write((char*)&colorDepth, sizeof(uint16_t));
+    bmpFile.flush();
+
+    // Image data settings
+    const uint32_t compressionMethod = 0; // no compression
+    const uint32_t rawBitmapDataSize = 0; // generally ignored
+    bmpFile.write((char*)&compressionMethod, sizeof(uint32_t));
+    bmpFile.flush();
+    bmpFile.write((char*)&rawBitmapDataSize, sizeof(uint32_t));
+    bmpFile.flush();
+
+    // Real-world size (for printing)
+    const int32_t horizontalResolution = 3780; // in pixel per meter
+    const int32_t verticalResolution = 3780; // in pixel per meter
+    bmpFile.write((char*)&horizontalResolution, sizeof(int32_t));
+    bmpFile.flush();
+    bmpFile.write((char*)&verticalResolution, sizeof(int32_t));
+    bmpFile.flush();
+
+    // Color palate lookup table information (unused)
+    const uint32_t colorTableEntries = 0; // not used in this implementation
+    const uint32_t importantColors = 0; // not used in this implementation
+    bmpFile.write((char*)&colorTableEntries, sizeof(uint32_t));
+    bmpFile.flush();
+    bmpFile.write((char*)&importantColors, sizeof(uint32_t));
+    bmpFile.flush();
+
+    return bytesInHeader;
+}
+
+int Rasterizer::writePixels(ofstream& bmpFile)
+{
+    // writing pixel data
+    int numberOfPixels = result.getWidth() * result.getHeight();
+    for (int i = 0; i < numberOfPixels; i++)
+    {
+        char red = 'R';
+        char gre = 'G';
+        char blu = 'B';
+        bmpFile.write((char*)&red, sizeof(uint8_t));
+        bmpFile.write((char*)&gre, sizeof(uint8_t));
+        bmpFile.write((char*)&blu, sizeof(uint8_t));
+    }
+
+    return numberOfPixels * 3;
+}
+
 Rasterizer::Rasterizer(ProjectedObject input, RasterGrid output) : result(output)
 {
     // This is where rasterization occurs
@@ -20,22 +114,33 @@ Rasterizer::Rasterizer(ProjectedObject input, RasterGrid output) : result(output
     // If they do not intersect, do nothing.
 }
 
-
 RasterGrid Rasterizer::getRasterizedGrid() {
     return result;
 }
 
-void Rasterizer::saveToBMP(string outfile)
+int Rasterizer::saveToBMP(string outfile)
 {
-    // This is where the rasterized data will be saved to a file
+    int byteCount = 0;
 
-    // First, check that outfile is a valid filename, and that it can be
-    // written to. If not, assert an error.
+    // open file
+    // Capstone Requirement 6 - File I/O
+    ofstream bmpFile;
+    bmpFile.open(outfile.c_str());
 
-    // Open the file at outfile for writing.
-    // Write the BMP header to the file.
-    // Most of the header is fixed.
-    // A few bytes represent the height and width of the image.
+    // check for valid file
+    if (!bmpFile.is_open())
+    {
+        return 0;
+    }
+
+    // Write header first
+    byteCount += writeHeader(bmpFile);
+
+    // Write pixels after header
+    byteCount += writePixels(bmpFile);
+
+    // Close the file
+    bmpFile.close();
 
     // In a loop, for every column in the result RasterGrid:
     // In a loop, for every row in the result RasterGrid:
@@ -48,4 +153,6 @@ void Rasterizer::saveToBMP(string outfile)
     // At the end of each row, if the number of bytes written is not
     // divisible by 4, add blank (all zero) bytes to the file
     // until the number of bytes in the row is divisible by 4.
+
+    return byteCount;
 }
