@@ -51,9 +51,9 @@ int main()
     };
     const sceneDescriptor teapotScene = {
         // Camera Positions
-        1.0,
-        2.0,
-        3.0,
+        0.0,
+        0.0,
+        0.0,
         // Camera Rotation
         camAxis::X,
         // Input file
@@ -61,7 +61,7 @@ int main()
         // Screen dimensions and scale
         320,
         240,
-        5.0
+        6.0
     };
 
     // Begin program

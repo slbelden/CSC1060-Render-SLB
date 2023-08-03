@@ -5,7 +5,6 @@
 // 2023-07-31
 // Stephen L. Belden
 
-#include <iostream> // DEBUG
 #include <vector>
 
 #include "camera.h"

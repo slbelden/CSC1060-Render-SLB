@@ -38,8 +38,8 @@ bool Triangle2d::pointIsInTri(Point2d p)
     double x = p.getX();
     double y = p.getY();
 
-    // Hardcore math. I don't understand this. This is not my own work.
-    // Code copied from reference above function.
+    // Hardcore math.
+    // Triangle intersection is a solved problem; I didn't invent this.
     double denominator = (x1 * (y2 - y3) + y1 * (x3 - x2) + x2 * y3 - y2 * x3);
     double a = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / denominator;
     double b = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / denominator;
