@@ -7,19 +7,22 @@
 // 2023-07-31
 // Stephen L. Belden
 
+// camera facing direction, used during projection
+enum camAxis {X, Y, Z};
+
 class Camera3d
 {
 private:
     Point3d iposition;
-    Point3d irotation;
+    camAxis irotation;
     double iscale;
 
 public:
     // A camera is created through this constructor.
     // A camera can not be modified after it has been created.
-    Camera3d(Point3d position, Point3d rotation, double scale);
+    Camera3d(Point3d position, camAxis rotation, double scale);
 
     // Member access functions
     Point3d getPosition();
-    Point3d getRotation();
+    camAxis getRotation();
 };

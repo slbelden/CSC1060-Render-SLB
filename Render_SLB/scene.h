@@ -24,9 +24,7 @@ struct sceneDescriptor
 	double camPosX = 0;
 	double camPosY = 0;
 	double camPosZ = 0;
-	double camRotX = 0;
-	double camRotY = 0;
-	double camRotZ = 0;
+	camAxis camRot = X;
 	string objName = "";
 	int screenWidth = 640;
 	int screenHeight = 480;
@@ -45,8 +43,7 @@ public:
 	Scene(sceneDescriptor desc) :
 		cam(Camera3d(
 			Point3d(desc.camPosX, desc.camPosY, desc.camPosZ),
-			Point3d(desc.camRotX, desc.camRotY, desc.camRotZ),
-			desc.screenScale)),
+			desc.camRot, desc.screenScale)),
 		obj(desc.objName),
 		screen(desc.screenWidth, desc.screenHeight, desc.screenScale)
 	{}

@@ -26,10 +26,8 @@ int main()
         1.0,
         2.0,
         3.0,
-        // Camera Rotations
-        4.0,
-        5.0,
-        6.0,
+        // Camera Rotation
+        camAxis::Y,
         // Input file
         "bunny.obj",
         // Screen dimensions and scale
@@ -42,10 +40,8 @@ int main()
         1.0,
         2.0,
         3.0,
-        // Camera Rotations
-        4.0,
-        5.0,
-        6.0,
+        // Camera Rotation
+        camAxis::X,
         // Input file
         "teapot.obj",
         // Screen dimensions and scale
@@ -63,7 +59,7 @@ int main()
     // Capstone Requirement 3 - Input/Output
     // Capstone Requirement 7 - Iteration (loops)
     // Capstone Requirement 8 - Interaction
-    for (char option = 'B'; option != 'E'; option = menuPrompt())
+    for (char option = 'T'; option != 'E'; option = menuPrompt())
     {
         cout << endl;
 
@@ -119,9 +115,14 @@ sceneDescriptor buildScene()
     cin >> newScene.camPosX >> newScene.camPosY >> newScene.camPosZ;
     cout << endl;
 
-    cout << "Provide camera rotation as three floating point numbers." << endl;
-    cout << "X, Y, Z, separated by blanks (eg: 0.0 1.0 -0.2): ";
-    cin >> newScene.camRotX >> newScene.camRotY >> newScene.camRotZ;
+    cout << "Provide camera rotation as one character, X, Y, or Z: ";
+    // store input
+    char temp;
+    cin >> temp;
+    // convert to enum and allow lowercase input
+    (toupper(temp) == 'X') ? newScene.camRot = camAxis::X : 
+        ((toupper(temp) == 'Y') ? newScene.camRot = camAxis::Y :
+            newScene.camRot = camAxis::Z);
     cout << endl;
 
     cout << "Provide the filename of the input .obj file: ";

@@ -13,9 +13,8 @@ string Scene::getInfoBlockText()
 			to_string(cam.getPosition().getY()) + " " +
 			to_string(cam.getPosition().getY()) + " " + "\n" +
 			"Camera Rotation: " +
-			to_string(cam.getRotation().getX()) + " " +
-			to_string(cam.getRotation().getY()) + " " +
-			to_string(cam.getRotation().getY()) + " " + "\n" +
+			((cam.getRotation() == camAxis::X) ? "X" :
+				(cam.getRotation() == camAxis::Y) ? "Y" : "Z") + " " + "\n" +
 			"\n" +
 			"Image Dimensions: " +
 			to_string(screen.getWidth()) + " x " +
