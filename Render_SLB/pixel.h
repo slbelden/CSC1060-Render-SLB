@@ -23,7 +23,7 @@ public:
 	Pixel(char r, char g, char b) : red(r), gre(g), blu(b) {};
 
 	// Random constructor
-	Pixel(int brightnessFloor);
+	Pixel(int randBrightFloor);
 
 	// Access functions
 	unsigned char getRed();

@@ -7,6 +7,7 @@
 
 #include <vector>
 
+#include "pixel.h"
 #include "points.h"
 
 using namespace std;
@@ -15,22 +16,23 @@ class RasterGrid {
 private:
     int iwidth;
     int iheight;
-    double ipixelScale;
-    vector<vector<int>> values;
+    double iscreenScale;
+    vector<vector<Pixel>> values;
 
 public:
     // Constructor specifies width, height, and scale, which can not be changed
-    RasterGrid(int width, int height, double pixelScale);
+    RasterGrid(int width, int height, double screenScale) :
+        iwidth(width), iheight(height), iscreenScale(screenScale) {};
+
+    // Returns the 2d point on the plane corresponding to the center of a
+    // given raster cell (pixel), used for calculations during rasterization.
+    Point2d getGridPointOffsets(int x, int y);
 
     // Member access functions
     int getWidth();
     int getHeight();
-    int getValue(int x, int y);
-
-    // Returns the 2d point on the plane corresponding to the center of a
-    // given raster cell (pixel), used for calculations during rasterization
-    Point2d getRasterPointCoords(int x, int y);
+    Pixel getValue(int x, int y);
 
     // Member setters
-    void setValue(int x, int y, int value);
+    void setValue(int x, int y, Pixel value);
 };

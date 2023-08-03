@@ -9,6 +9,7 @@
 #include <fstream>
 
 #include "grid.h"
+#include "pixel.h"
 #include "project.h"
 
 class Rasterizer

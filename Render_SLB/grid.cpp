@@ -2,11 +2,32 @@
 
 // RasterGrid definition
 
-RasterGrid::RasterGrid(int width, int height, double pixelScale)
+Point2d RasterGrid::getGridPointOffsets(int x, int y)
 {
-    iwidth = width;
-    iheight = height;
-    ipixelScale = pixelScale;
+    // Check bounds
+    if (x > iwidth || y > iheight)
+    {
+        throw out_of_range("getRasterPointCoords() argument out of bounds");
+    }
+
+    // Divide horizontal scale into pixel-sized increments
+    double stepHor = iscreenScale / iwidth;
+
+    // Determine vertical scale from aspect ratio
+    double aspect = static_cast<double>(iwidth) / static_cast<double>(iheight);
+    double stepVer = stepHor / aspect;
+
+    // Calculate offsets
+    double offsetHor = stepHor * x;
+    double offsetVer = stepVer * y;
+
+    // Because it is desirable for the camera coordinates to represent the
+    // center of the screen, not the corner, shift offsets by half the screen
+    double shiftOffH = offsetHor - (iscreenScale / 2);
+    double shiftOffV = offsetVer - ((iscreenScale / aspect)) / 2;
+
+    // Construct the "point" to return two values
+    return Point2d(shiftOffH, shiftOffV);
 }
 
 int RasterGrid::getWidth()
@@ -19,19 +40,12 @@ int RasterGrid::getHeight()
     return iheight;
 }
 
-int RasterGrid::getValue(int x, int y)
+Pixel RasterGrid::getValue(int x, int y)
 {
     return values[x][y];
 }
 
-Point2d RasterGrid::getRasterPointCoords(int x, int y)
-{
-    double col = ipixelScale * x;
-    double row = ipixelScale * y;
-    return Point2d(x, y);
-}
-
-void RasterGrid::setValue(int x, int y, int value)
+void RasterGrid::setValue(int x, int y, Pixel value)
 {
     values[x][y] = value;
 }

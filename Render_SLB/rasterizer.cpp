@@ -88,7 +88,25 @@ int Rasterizer::writePixels(ofstream& bmpFile)
 
 Rasterizer::Rasterizer(ProjectedObject input, RasterGrid output) : result(output)
 {
-    // This is where rasterization occurs
+    // Black colored pixel
+    const Pixel black = Pixel(0, 0, 0);
+
+    // Rasterize each Triangle from back to front
+    for (size_t i = input.getProjectedTris().size() - 1; i >= 0; i--)
+    {
+        // Generate a random color to use for this triangle.
+        // Use a minimum brightness of 100 for contrast on black background.
+        Pixel color = Pixel(100);
+
+        // Check every pixel in the grid
+        for (int row = 0; row < output.getWidth(); row++)
+        {
+            for (int col = 0; col < output.getHeight(); col++)
+            {
+
+            }
+        }
+    }
 
     // In a loop, for each Triangle2d in input, until all tris are read:
     // Generate a random int value, representing a color for this tri.
