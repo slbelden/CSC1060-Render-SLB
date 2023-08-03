@@ -24,12 +24,26 @@ int main()
     const sceneDescriptor triangleScene = {
         // Camera Positions
         0.0,
-        0.0,
+        10.0,
         0.0,
         // Camera Rotation
         camAxis::Y,
         // Input file
-        "onetri.obj",
+        "twotri.obj",
+        // Screen dimensions and scale
+        640,
+        480,
+        12.0
+    };
+    const sceneDescriptor flippedScene = {
+        // Camera Positions
+        0.0,
+        -10.0,
+        0.0,
+        // Camera Rotation
+        camAxis::Y,
+        // Input file
+        "twotri.obj",
         // Screen dimensions and scale
         640,
         480,
@@ -39,7 +53,7 @@ int main()
         // Camera Positions
         -0.02,
         0.115,
-        1.0,
+        3.0,
         // Camera Rotation
         camAxis::Z,
         // Input file
@@ -73,7 +87,7 @@ int main()
     // Capstone Requirement 3 - Input/Output
     // Capstone Requirement 7 - Iteration (loops)
     // Capstone Requirement 8 - Interaction
-    for (char option = 'O'; option != 'E'; option = menuPrompt())
+    for (char option = 'S'; option != 'E'; option = menuPrompt())
     {
         cout << endl;
 
@@ -89,8 +103,13 @@ int main()
             printSceneInfo(scene);
             break;
 
-        case 'O':
+        case 'S':
             scene = Scene(triangleScene);
+            printSceneInfo(scene);
+            break;
+
+        case 'F':
+            scene = Scene(flippedScene);
             printSceneInfo(scene);
             break;
 
@@ -180,7 +199,8 @@ char menuPrompt()
     cout << "Menu Options:" << endl;
     cout << "    B - load the Stanford Bunny scene (VERY slow)" << endl;
     cout << "    T - load the Utah Teapot scene (slow)" << endl;
-    cout << "    O - load a single triangle scene (fastest)" << endl;
+    cout << "    S - load a Simple triangle scene (fastest)" << endl;
+    cout << "    F - load a Flipped version of the simple scene" << endl;
     cout << "    C - specify a Custom scene to load" << endl;
     cout << "    P - Print info about the currently loaded scene" << endl;
     cout << "    R - Render the currently loaded scene" << endl;
