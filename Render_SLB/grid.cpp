@@ -12,13 +12,6 @@ RasterGrid::RasterGrid(int width, int height, double screenScale)
 
 Point2d RasterGrid::getGridPointOffsets(int x, int y)
 {
-    // Check bounds
-    if (x > iwidth || y > iheight)
-    {
-        throw out_of_range("getRasterPointCoords() argument out of bounds: (" 
-            + to_string(x) + ", " + to_string(y) + ").");
-    }
-
     // Divide horizontal scale into pixel-sized increments
     double stepHor = iscreenScale / iwidth;
 

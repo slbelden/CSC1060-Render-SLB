@@ -27,7 +27,7 @@ int main()
         0.0,
         0.0,
         // Camera Rotation
-        camAxis::Z,
+        camAxis::Y,
         // Input file
         "onetri.obj",
         // Screen dimensions and scale
