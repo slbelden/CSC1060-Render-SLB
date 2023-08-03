@@ -88,11 +88,11 @@ int Rasterizer::writePixels(ofstream& bmpFile)
 void Rasterizer::writeBlock(ofstream& bmpFile)
 {
     // write pixel data to upper left quarter of screen
-    for (int row = 0; row < result.getWidth(); row++)
+    for (int row = 0; row < result.getHeight(); row++)
     {
-        for (int col = 0; col < result.getHeight(); col++)
+        for (int col = 0; col < result.getWidth(); col++)
         {
-            if (row < (result.getWidth() / 2) && col < (result.getHeight() / 2))
+            if (row < (result.getHeight() / 2) && col < (result.getWidth() / 2))
             {
                 unsigned char red = 100u;
                 unsigned char gre = 200u;
