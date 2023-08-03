@@ -21,6 +21,20 @@ int main()
     Scene scene = Scene(sceneDescriptor());
 
     // Default included scenes
+    const sceneDescriptor triangleScene = {
+        // Camera Positions
+        0.0,
+        0.0,
+        0.0,
+        // Camera Rotation
+        camAxis::Z,
+        // Input file
+        "onetri.obj",
+        // Screen dimensions and scale
+        640,
+        480,
+        5.0
+    };
     const sceneDescriptor bunnyScene = {
         // Camera Positions
         1.0,
@@ -59,7 +73,7 @@ int main()
     // Capstone Requirement 3 - Input/Output
     // Capstone Requirement 7 - Iteration (loops)
     // Capstone Requirement 8 - Interaction
-    for (char option = 'T'; option != 'E'; option = menuPrompt())
+    for (char option = 'O'; option != 'E'; option = menuPrompt())
     {
         cout << endl;
 
@@ -72,6 +86,11 @@ int main()
 
         case 'T':
             scene = Scene(teapotScene);
+            printSceneInfo(scene);
+            break;
+
+        case 'O':
+            scene = Scene(triangleScene);
             printSceneInfo(scene);
             break;
 
@@ -159,8 +178,9 @@ char menuPrompt()
     char c;
 
     cout << "Menu Options:" << endl;
-    cout << "    B - load the Stanford Bunny scene" << endl;
-    cout << "    T - load the Utah Teapot scene" << endl;
+    cout << "    B - load the Stanford Bunny scene (VERY slow)" << endl;
+    cout << "    T - load the Utah Teapot scene (slow)" << endl;
+    cout << "    O - load a single triangle scene (fastest)" << endl;
     cout << "    C - specify a Custom scene to load" << endl;
     cout << "    P - Print info about the currently loaded scene" << endl;
     cout << "    R - Render the currently loaded scene" << endl;

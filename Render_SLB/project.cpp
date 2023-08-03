@@ -18,6 +18,12 @@ ProjectedObject::ProjectedObject(SortedObject input, Camera3d camera)
 
             // Save projected point into internal private class list
             projectedTris.push_back(Triangle2d(newA, newB, newC));
+
+            // DEBUG
+            cout << "2d Triangle:" << endl;
+            cout << "A: (" << newA.getX() << ", " << newA.getY() << ")" << endl;
+            cout << "B: (" << newB.getX() << ", " << newB.getY() << ")" << endl;
+            cout << "C: (" << newC.getX() << ", " << newC.getY() << ")" << endl;
         }
         break;
 
@@ -32,6 +38,12 @@ ProjectedObject::ProjectedObject(SortedObject input, Camera3d camera)
 
             // Save projected point into internal private class list
             projectedTris.push_back(Triangle2d(newA, newB, newC));
+
+            // DEBUG
+            cout << "2d Triangle:" << endl;
+            cout << "A: (" << newA.getX() << ", " << newA.getY() << ")" << endl;
+            cout << "B: (" << newB.getX() << ", " << newB.getY() << ")" << endl;
+            cout << "C: (" << newC.getX() << ", " << newC.getY() << ")" << endl;
         }
         break;
 
@@ -46,6 +58,12 @@ ProjectedObject::ProjectedObject(SortedObject input, Camera3d camera)
 
             // Save projected point into internal private class list
             projectedTris.push_back(Triangle2d(newA, newB, newC));
+
+            // DEBUG
+            cout << "2d Triangle:" << endl;
+            cout << "A: (" << newA.getX() << ", " << newA.getY() << ")" << endl;
+            cout << "B: (" << newB.getX() << ", " << newB.getY() << ")" << endl;
+            cout << "C: (" << newC.getX() << ", " << newC.getY() << ")" << endl;
         }
         break;
 
