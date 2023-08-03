@@ -53,7 +53,7 @@ int main()
     // Begin program
     cout << "SLB Software Rasterizer - CCD.edu CSC1060C03 Capstone Project"
         << endl << endl;
-    cout << "Loading default scene, Stanford Bunny..." << endl;
+    cout << "Loading default scene..." << endl;
 
     // Interactive terminal menu system
     // Capstone Requirement 3 - Input/Output
@@ -153,6 +153,7 @@ string bunchOfChars(char c, int n)
     return result;
 }
 
+// Present the user with options and return only one choice
 char menuPrompt()
 {
     char c;
@@ -175,6 +176,7 @@ char menuPrompt()
     return toupper(c);
 }
 
+// Show info about the currently loaded scene to the user in a formated block
 void printSceneInfo(Scene& scene)
 {
     cout << bunchOfChars('#', 24) << " Scene Info "

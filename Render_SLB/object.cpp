@@ -1,4 +1,5 @@
 #include "object.h"
+#include <iostream> // DEBUG
 
 // Object3d definition
 
@@ -71,6 +72,15 @@ Object3d::Object3d(string inFile)
     // set internal vertex counter,
     // since this information will be lost out of this scope
     vertCount = verts.size();
+
+    // DEBUG
+    cout << endl;
+    cout << "DEBUG: First vertex line read as:" << endl;
+    cout << "v: " <<
+        verts[0].getX() << " " <<
+        verts[0].getY() << " " <<
+        verts[0].getZ() << endl;
+    cout << endl;
 }
 
 string Object3d::getInputFilename()

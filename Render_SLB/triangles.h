@@ -18,27 +18,29 @@ private:
 public:
     // A triangle is created through this constructor.
     // A triangle can not be modified after it has been created.
-    Triangle3d(Point3d A, Point3d B, Point3d C);
+    Triangle3d(Point3d A, Point3d B, Point3d C) : iA(A), iB(B), iC(C) {};
 
     // Member access functions
-    Point3d getVert1();
-    Point3d getVert2();
-    Point3d getVert3();
+    Point3d getVertA();
+    Point3d getVertB();
+    Point3d getVertC();
 };
 
 // Class representing a single triangle, or face, in 2d space
 class Triangle2d
 {
 private:
-    Point3d iA;
-    Point3d iB;
+    Point2d iA;
+    Point2d iB;
+    Point2d iC;
 
 public:
     // A triangle is created through this constructor.
     // A triangle can not be modified after it has been created.
-    Triangle2d(Point3d A, Point3d B);
+    Triangle2d(Point2d A, Point2d B, Point2d C) : iA(A), iB(B), iC(C) {};
 
     // Member access functions
-    Point3d getVert1();
-    Point3d getVert2();
+    Point2d getVertA();
+    Point2d getVertB();
+    Point2d getVertC();
 };

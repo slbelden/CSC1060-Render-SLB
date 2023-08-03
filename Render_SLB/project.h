@@ -17,7 +17,7 @@ using namespace std;
 class ProjectedObject
 {
 private:
-    vector<Point2d> projectedPointsList;
+    vector<Triangle2d> projectedTris;
 
 public:
     // The functionality of this class is implemented in its constructor,
@@ -25,5 +25,5 @@ public:
     ProjectedObject(SortedObject input, Camera3d camera);
 
     // Result access function
-    vector<Point2d> getProjectedTris();
+    vector<Triangle2d> getProjectedTris();
 };

@@ -7,7 +7,8 @@
 // 2023-07-31
 // Stephen L. Belden
 
-// camera facing direction, used during projection
+// Camera facing direction, used during projection.
+// The specified axis is normal to the camera plane.
 enum camAxis {X, Y, Z};
 
 class Camera3d

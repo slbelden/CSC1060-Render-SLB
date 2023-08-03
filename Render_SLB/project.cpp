@@ -4,25 +4,55 @@
 
 ProjectedObject::ProjectedObject(SortedObject input, Camera3d camera)
 {
-    // This is where projection occurs
+    // Projecting from 3d to 2d involves discarding one 3d axis,
+    // the camera rotation defines which axis to remove.
+    switch (camera.getRotation()) {
+    case camAxis::X:
+        // Discard X coordinate in all triangles of object
+        for (Triangle3d tri : input.getDepthSortedTris())
+        {
+            // Project each point of the triangle
+            Point2d newA = Point2d(tri.getVertA().getY(), tri.getVertA().getZ());
+            Point2d newB = Point2d(tri.getVertB().getY(), tri.getVertB().getZ());
+            Point2d newC = Point2d(tri.getVertC().getY(), tri.getVertC().getZ());
 
-    // First, define the projection plane.
-    // The plane is determined by the position and rotation of the
-    // camera. A 2d plane in 3d space can be defined by 3 points.
-    // Conveniently, we already have a class for that. A Triangle3d
-    // can be used to define the plane.
-    // The  plane is defined to be a small fixed distance in front of
-    // the camera, tangent to the rotation vector of the camera.
+            // Save projected point into internal private class list
+            projectedTris.push_back(Triangle2d(newA, newB, newC));
+        }
+        break;
 
-    // In a loop, for each Triangle3d in input, until all tris are read:
-    // In a loop, for each of the three Point3d objects in a triangle:
-    // Project the point onto the projection plane.
-    // Store the result in a Point2d.
-    // Store the three Point2d objects in a Triangle2d.
-    // Add each Triangle2d to projectedPointsList.
+    case camAxis::Y:
+        // Discard Y coordinate in all points of object
+        for (Triangle3d tri : input.getDepthSortedTris())
+        {
+            // Project each point of the triangle
+            Point2d newA = Point2d(tri.getVertA().getX(), tri.getVertA().getZ());
+            Point2d newB = Point2d(tri.getVertB().getX(), tri.getVertB().getZ());
+            Point2d newC = Point2d(tri.getVertC().getX(), tri.getVertC().getZ());
+
+            // Save projected point into internal private class list
+            projectedTris.push_back(Triangle2d(newA, newB, newC));
+        }
+        break;
+
+    case camAxis::Z:
+        // Discard Z coordinate in all points of object
+        for (Triangle3d tri : input.getDepthSortedTris())
+        {
+            // Project each point of the triangle
+            Point2d newA = Point2d(tri.getVertA().getX(), tri.getVertA().getY());
+            Point2d newB = Point2d(tri.getVertB().getX(), tri.getVertB().getY());
+            Point2d newC = Point2d(tri.getVertC().getX(), tri.getVertC().getY());
+
+            // Save projected point into internal private class list
+            projectedTris.push_back(Triangle2d(newA, newB, newC));
+        }
+        break;
+
+    }
 }
 
-vector<Point2d> ProjectedObject::getProjectedTris()
+vector<Triangle2d> ProjectedObject::getProjectedTris()
 {
-    return projectedPointsList;
+    return projectedTris;
 }

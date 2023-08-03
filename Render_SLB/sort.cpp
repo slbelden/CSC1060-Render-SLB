@@ -11,9 +11,9 @@ SortedObject::SortedObject(Object3d object, Camera3d camera)
     for (Triangle3d tri : object.getTriList())
     {
         // calculate average position of triangle's verticies
-        double xAvg = (tri.getVert1().getX() + tri.getVert2().getX() + tri.getVert3().getX()) / 3;
-        double yAvg = (tri.getVert1().getY() + tri.getVert2().getY() + tri.getVert3().getY()) / 3;
-        double zAvg = (tri.getVert1().getZ() + tri.getVert2().getZ() + tri.getVert3().getZ()) / 3;
+        double xAvg = (tri.getVertA().getX() + tri.getVertB().getX() + tri.getVertC().getX()) / 3;
+        double yAvg = (tri.getVertA().getY() + tri.getVertB().getY() + tri.getVertC().getY()) / 3;
+        double zAvg = (tri.getVertA().getZ() + tri.getVertB().getZ() + tri.getVertC().getZ()) / 3;
 
         // calculate distance from camera using 3d Pythagorean theorem
         double sideX = xAvg - camera.getPosition().getX();

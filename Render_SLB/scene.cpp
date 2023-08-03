@@ -44,6 +44,10 @@ void Scene::renderToFile(string outFile)
 
 	// Project
 	ProjectedObject projection = ProjectedObject(sortObj, cam);
+	cout << "Projected " << projection.getProjectedTris().size() * 3 <<
+		" 3d points into 2d orthogonal to the " <<
+		((cam.getRotation() == camAxis::X) ? "X" :
+			(cam.getRotation() == camAxis::Y) ? "Y" : "Z") << " axis." << endl;
 
 	// Rasterize
 	Rasterizer rasterizer = Rasterizer(projection, screen);
