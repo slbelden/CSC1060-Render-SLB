@@ -177,11 +177,15 @@ Rasterizer::Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output)
         {
             for (int col = 0; col < result.getWidth(); col++)
             {
-                // Test for intersection with triangle at current pixel
-                Point2d testPoint = result.getGridPointOffsets(col, row);
+                // Shift points by camera coordinates
+                Point2d testOfsets = result.getGridPointOffsets(col, row);
+                Point2d screenPoint =
+                    Point2d(screenLocalX + testOfsets.getX(),
+                        screenLocalY + testOfsets.getY());
 
-                // Set pixel color according to intersection test
-                if (tri.pointIsInTri(testPoint))
+                // Test for intersection with triangle at current pixel and
+                // set pixel color according to intersection test.
+                if (tri.pointIsInTri(screenPoint))
                 {
                     result.setValue(row, col, color);
                     hitCounter++;
