@@ -33,7 +33,7 @@ int main()
         // Screen dimensions and scale
         320,
         240,
-        5.0
+        4.0
     };
     const sceneDescriptor bunnyScene = {
         // Camera Positions

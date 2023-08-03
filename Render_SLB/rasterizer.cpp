@@ -150,13 +150,13 @@ Rasterizer::Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output)
     }
 
     // Give feedback to the user
+    Point2d topLeft = result.getGridPointOffsets(0, 0);
+    Point2d botRight = result.getGridPointOffsets(result.getWidth(), result.getHeight());
     cout << "Rasterizing screen from (" <<
-        screenLocalX + result.getGridPointOffsets(0, 0).getX() << ", " <<
-        screenLocalY + result.getGridPointOffsets(0, 0).getY() << ") to (" <<
-        screenLocalX + result.getGridPointOffsets(
-            result.getWidth(), result.getHeight()).getX() << ", " <<
-        screenLocalY + result.getGridPointOffsets(
-            result.getWidth(), result.getHeight()).getY() << ")" << endl;
+        screenLocalX + topLeft.getX() << ", " <<
+        screenLocalY + topLeft.getY() << ") to (" <<
+        screenLocalX + botRight.getX() << ", " <<
+        screenLocalY + botRight.getY() << ")" << endl;
 
     // Rasterize each Triangle from back to front
     for (Triangle2d& tri : input.getProjectedTris())
