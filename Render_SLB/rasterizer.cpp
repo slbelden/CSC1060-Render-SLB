@@ -68,9 +68,9 @@ int Rasterizer::writeHeader(ofstream& bmpFile)
 int Rasterizer::writePixels(ofstream& bmpFile)
 {
     // write pixel data
-    for (int row = 0; row < result.getWidth(); row++)
+    for (int row = 0; row < result.getHeight(); row++)
     {
-        for (int col = 0; col < result.getHeight(); col++)
+        for (int col = 0; col < result.getWidth(); col++)
         {
             unsigned char red = result.getValue(row, col).getRed();
             unsigned char gre = result.getValue(row, col).getGre();
@@ -239,10 +239,10 @@ int Rasterizer::saveToBMP(string outfile)
     byteCount += writeHeader(bmpFile);
 
     // Write pixels after header
-    //byteCount += writePixels(bmpFile);
+    byteCount += writePixels(bmpFile);
 
     // DEBUG
-    writeBlock(bmpFile);
+    // writeBlock(bmpFile);
 
     // Close the file
     bmpFile.close();

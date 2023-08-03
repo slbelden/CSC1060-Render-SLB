@@ -6,8 +6,8 @@ RasterGrid::RasterGrid(int width, int height, double screenScale)
     : iwidth(width), iheight(height), iscreenScale(screenScale)
 {
     // Initialize values to all black
-    values = vector<vector<Pixel>>(width,
-        std::vector<Pixel>(height, Pixel(0, 0, 0)));
+    values = vector<vector<Pixel>>(height,
+        std::vector<Pixel>(width, Pixel(0, 0, 0)));
 }
 
 Point2d RasterGrid::getGridPointOffsets(int x, int y)
