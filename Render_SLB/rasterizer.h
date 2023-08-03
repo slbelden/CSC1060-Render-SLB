@@ -7,7 +7,9 @@
 
 #include <cstdint>
 #include <fstream>
+#include <iostream>
 
+#include "camera.h"
 #include "grid.h"
 #include "pixel.h"
 #include "project.h"
@@ -24,7 +26,7 @@ private:
 public:
     // The functionality of this class is implemented in its constructor,
     // the class is intended to be instantiated and immediately used.
-    Rasterizer(ProjectedObject input, RasterGrid output);
+    Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output);
 
     // Result access function
     RasterGrid getRasterizedGrid();

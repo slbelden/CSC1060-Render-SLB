@@ -52,6 +52,9 @@ SortedObject::SortedObject(Object3d object, Camera3d camera)
             }
         }
     }
+    // We sorted from least depth to greatest depth. Later we'll need greatest
+    // depth to least depth.
+    reverse(depthSortedTris.begin(), depthSortedTris.end());
 }
 
 // Result access function

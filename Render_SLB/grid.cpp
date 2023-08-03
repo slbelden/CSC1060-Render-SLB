@@ -2,12 +2,21 @@
 
 // RasterGrid definition
 
+RasterGrid::RasterGrid(int width, int height, double screenScale)
+    : iwidth(width), iheight(height), iscreenScale(screenScale)
+{
+    // Initialize values to all black
+    values = vector<vector<Pixel>>(width,
+        std::vector<Pixel>(height, Pixel(0, 0, 0)));
+}
+
 Point2d RasterGrid::getGridPointOffsets(int x, int y)
 {
     // Check bounds
     if (x > iwidth || y > iheight)
     {
-        throw out_of_range("getRasterPointCoords() argument out of bounds");
+        throw out_of_range("getRasterPointCoords() argument out of bounds: (" 
+            + to_string(x) + ", " + to_string(y) + ").");
     }
 
     // Divide horizontal scale into pixel-sized increments

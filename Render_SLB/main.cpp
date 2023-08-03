@@ -45,9 +45,9 @@ int main()
         // Input file
         "teapot.obj",
         // Screen dimensions and scale
-        640,
-        480,
-        1.0
+        320,
+        240,
+        5.0
     };
 
     // Begin program

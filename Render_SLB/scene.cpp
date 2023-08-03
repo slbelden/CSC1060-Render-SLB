@@ -11,7 +11,7 @@ string Scene::getInfoBlockText()
 			"Camera Position: " +
 			to_string(cam.getPosition().getX()) + " " +
 			to_string(cam.getPosition().getY()) + " " +
-			to_string(cam.getPosition().getY()) + " " + "\n" +
+			to_string(cam.getPosition().getZ()) + " " + "\n" +
 			"Camera Rotation: " +
 			((cam.getRotation() == camAxis::X) ? "X" :
 				(cam.getRotation() == camAxis::Y) ? "Y" : "Z") + " " + "\n" +
@@ -50,7 +50,7 @@ void Scene::renderToFile(string outFile)
 			(cam.getRotation() == camAxis::Y) ? "Y" : "Z") << " axis." << endl;
 
 	// Rasterize
-	Rasterizer rasterizer = Rasterizer(projection, screen);
+	Rasterizer rasterizer = Rasterizer(cam, projection, screen);
 
 	// Output
 	int bytes = rasterizer.saveToBMP(outFile);

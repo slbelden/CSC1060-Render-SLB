@@ -5,6 +5,7 @@
 // 2023-07-31
 // Stephen L. Belden
 
+#include <string>
 #include <vector>
 
 #include "pixel.h"
@@ -21,8 +22,7 @@ private:
 
 public:
     // Constructor specifies width, height, and scale, which can not be changed
-    RasterGrid(int width, int height, double screenScale) :
-        iwidth(width), iheight(height), iscreenScale(screenScale) {};
+    RasterGrid(int width, int height, double screenScale);
 
     // Returns the 2d point on the plane corresponding to the center of a
     // given raster cell (pixel), used for calculations during rasterization.

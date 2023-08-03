@@ -39,6 +39,9 @@ public:
     // A triangle can not be modified after it has been created.
     Triangle2d(Point2d A, Point2d B, Point2d C) : iA(A), iB(B), iC(C) {};
 
+    // Intersection test
+    bool pointIsInTri(Point2d p);
+
     // Member access functions
     Point2d getVertA();
     Point2d getVertB();

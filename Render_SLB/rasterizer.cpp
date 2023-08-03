@@ -67,7 +67,22 @@ int Rasterizer::writeHeader(ofstream& bmpFile)
 
 int Rasterizer::writePixels(ofstream& bmpFile)
 {
-    // writing pixel data
+    // write pixel data
+    for (int row = 0; row < result.getWidth(); row++)
+    {
+        for (int col = 0; col < result.getHeight(); col++)
+        {
+            unsigned char red = result.getValue(row, col).getRed();
+            unsigned char gre = result.getValue(row, col).getGre();
+            unsigned char blu = result.getValue(row, col).getBlu();
+            bmpFile.write((char*)&red, sizeof(uint8_t));
+            bmpFile.write((char*)&gre, sizeof(uint8_t));
+            bmpFile.write((char*)&blu, sizeof(uint8_t));
+        }
+    }
+
+
+
     int numberOfPixels = result.getWidth() * result.getHeight();
     for (int i = 0; i < numberOfPixels; i++)
     {
@@ -86,27 +101,89 @@ int Rasterizer::writePixels(ofstream& bmpFile)
 
 // Public functions
 
-Rasterizer::Rasterizer(ProjectedObject input, RasterGrid output) : result(output)
+Rasterizer::Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output)
+    : result(output)
 {
+    // Capstone Requirement 4 - Variables
+    int hitCounter = 0;
+    int missCounter = 0;
+    int triCounter = 0;
+
     // Black colored pixel
     const Pixel black = Pixel(0, 0, 0);
 
+    // Determine which camera axes make up the screen
+    double screenLocalX = 0.0;
+    double screenLocalY = 0.0;
+    switch (cam.getRotation()) {
+    case camAxis::X:
+        screenLocalX = cam.getPosition().getY();
+        screenLocalY = cam.getPosition().getZ();
+        break;
+
+    case camAxis::Y:
+        screenLocalX = cam.getPosition().getX();
+        screenLocalY = cam.getPosition().getZ();
+        break;
+
+    case camAxis::Z:
+        screenLocalX = cam.getPosition().getX();
+        screenLocalY = cam.getPosition().getY();
+        break;
+    }
+
+    // Give feedback to the user
+    cout << "Rasterizing screen from (" <<
+        screenLocalX + result.getGridPointOffsets(0, 0).getX() << ", " <<
+        screenLocalY + result.getGridPointOffsets(0, 0).getY() << ") to (" <<
+        screenLocalX + result.getGridPointOffsets(
+            result.getWidth(), result.getHeight()).getX() << ", " <<
+        screenLocalY + result.getGridPointOffsets(
+            result.getWidth(), result.getHeight()).getY() << ")" << endl;
+
     // Rasterize each Triangle from back to front
-    for (size_t i = input.getProjectedTris().size() - 1; i >= 0; i--)
+    for (Triangle2d& tri : input.getProjectedTris())
     {
+        // Give occasional feedback to the user
+        if (triCounter % 250 == 0)
+        {
+            cout << "Rendered " << triCounter << " out of " <<
+                input.getProjectedTris().size() << " triangles..." << endl;
+        }
+
         // Generate a random color to use for this triangle.
         // Use a minimum brightness of 100 for contrast on black background.
         Pixel color = Pixel(100);
 
         // Check every pixel in the grid
-        for (int row = 0; row < output.getWidth(); row++)
+        for (int row = 0; row < result.getWidth(); row++)
         {
-            for (int col = 0; col < output.getHeight(); col++)
+            for (int col = 0; col < result.getHeight(); col++)
             {
+                // Test for intersection with triangle at current pixel
+                Point2d testPoint = result.getGridPointOffsets(row, col);
 
+                // TODO
+
+                // Set pixel color according to intersection test
+                if (tri.pointIsInTri(testPoint))
+                {
+                    result.setValue(row, col, color);
+                    hitCounter++;
+                }
+                else
+                {
+                    missCounter++;
+                }
             }
         }
+
+        triCounter++;
     }
+
+    // Output stats
+    cout << "Rendered " << hitCounter << " colored pixels and " <<
+        missCounter << " backgorund pixels." << endl;
 
     // In a loop, for each Triangle2d in input, until all tris are read:
     // Generate a random int value, representing a color for this tri.
