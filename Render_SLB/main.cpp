@@ -31,37 +31,37 @@ int main()
         // Input file
         "onetri.obj",
         // Screen dimensions and scale
-        320,
-        240,
-        4.0
+        640,
+        480,
+        12.0
     };
     const sceneDescriptor bunnyScene = {
         // Camera Positions
         -0.02,
         0.115,
-        -0.5,
+        1.0,
         // Camera Rotation
         camAxis::Z,
         // Input file
         "bunny.obj",
         // Screen dimensions and scale
-        320,
-        240,
+        640,
+        480,
         0.27
     };
     const sceneDescriptor teapotScene = {
         // Camera Positions
-        0.0,
-        0.0,
-        0.0,
+        0.15,
+        1.5,
+        -10.0,
         // Camera Rotation
         camAxis::Z,
         // Input file
         "teapot.obj",
         // Screen dimensions and scale
-        80,
-        60,
-        6.0
+        320,
+        240,
+        7.0
     };
 
     // Begin program
