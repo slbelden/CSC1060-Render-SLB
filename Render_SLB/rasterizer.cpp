@@ -34,7 +34,7 @@ int Rasterizer::writeHeader(ofstream& bmpFile)
 
     // Image dimensions
     int32_t width = result.getWidth();
-    int32_t height = result.getHeight();
+    int32_t height = result.getHeight() * -1; // negate to draw from top left
     bmpFile.write((char*)&width, sizeof(int32_t));
     bmpFile.write((char*)&height, sizeof(int32_t));
 
@@ -82,8 +82,36 @@ int Rasterizer::writePixels(ofstream& bmpFile)
     }
 
     int numberOfPixels = result.getWidth() * result.getHeight();
-
     return numberOfPixels * 3;
+}
+
+void Rasterizer::writeBlock(ofstream& bmpFile)
+{
+    // write pixel data to upper left quarter of screen
+    for (int row = 0; row < result.getWidth(); row++)
+    {
+        for (int col = 0; col < result.getHeight(); col++)
+        {
+            if (row < (result.getWidth() / 2) && col < (result.getHeight() / 2))
+            {
+                unsigned char red = 100u;
+                unsigned char gre = 200u;
+                unsigned char blu = 255u;
+                bmpFile.write((char*)&red, sizeof(uint8_t));
+                bmpFile.write((char*)&gre, sizeof(uint8_t));
+                bmpFile.write((char*)&blu, sizeof(uint8_t));
+            }
+            else
+            {
+                unsigned char red = 0u;
+                unsigned char gre = 0u;
+                unsigned char blu = 0u;
+                bmpFile.write((char*)&red, sizeof(uint8_t));
+                bmpFile.write((char*)&gre, sizeof(uint8_t));
+                bmpFile.write((char*)&blu, sizeof(uint8_t));
+            }
+        }
+    }
 }
 
 
@@ -211,7 +239,10 @@ int Rasterizer::saveToBMP(string outfile)
     byteCount += writeHeader(bmpFile);
 
     // Write pixels after header
-    byteCount += writePixels(bmpFile);
+    //byteCount += writePixels(bmpFile);
+
+    // DEBUG
+    writeBlock(bmpFile);
 
     // Close the file
     bmpFile.close();

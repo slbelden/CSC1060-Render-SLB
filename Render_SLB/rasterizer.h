@@ -22,6 +22,7 @@ private:
     // Helper functions for code organization
     int writeHeader(ofstream& bmpFile);
     int writePixels(ofstream& bmpFile);
+    void writeBlock(ofstream& bmpFile); // DEBUG
 
 public:
     // The functionality of this class is implemented in its constructor,

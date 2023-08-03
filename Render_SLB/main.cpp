@@ -31,8 +31,8 @@ int main()
         // Input file
         "onetri.obj",
         // Screen dimensions and scale
-        640,
-        480,
+        320,
+        240,
         5.0
     };
     const sceneDescriptor bunnyScene = {
