@@ -39,7 +39,7 @@
     <ClCompile Include="project.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="rasterizer.cpp">
+    <ClCompile Include="rasterize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scene.cpp">
@@ -68,7 +68,7 @@
     <ClInclude Include="project.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rasterizer.h">
+    <ClInclude Include="rasterize.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sort.h">

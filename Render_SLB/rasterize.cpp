@@ -1,4 +1,4 @@
-#include "rasterizer.h"
+#include "rasterize.h"
 
 // rasterizer.cpp
 // Definitions for Rasterizer class

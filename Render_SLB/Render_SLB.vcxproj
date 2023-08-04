@@ -137,7 +137,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="project.cpp" />
     <ClCompile Include="grid.cpp" />
-    <ClCompile Include="rasterizer.cpp" />
+    <ClCompile Include="rasterize.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="sort.cpp" />
     <ClCompile Include="triangles.cpp" />
@@ -149,7 +149,7 @@
     <ClInclude Include="points.h" />
     <ClInclude Include="project.h" />
     <ClInclude Include="grid.h" />
-    <ClInclude Include="rasterizer.h" />
+    <ClInclude Include="rasterize.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="sort.h" />
     <ClInclude Include="triangles.h" />

@@ -13,7 +13,7 @@
 #include "object.h"
 #include "points.h"
 #include "project.h"
-#include "rasterizer.h"
+#include "rasterize.h"
 #include "sort.h"
 #include "triangles.h"
 
