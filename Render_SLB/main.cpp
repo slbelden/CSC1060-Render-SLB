@@ -22,65 +22,34 @@ int main()
     // Capstone Requirement 4 - Variables
     Scene scene = Scene(sceneDescriptor());
 
-    // Default included scenes
+    // Included scenes
     const sceneDescriptor triangleScene = {
-        // Camera Positions
-        0.0,
-        10.0,
-        0.0,
-        // Camera Rotation
-        camAxis::Y,
-        // Input file
-        "twotri.obj",
-        // Screen dimensions and scale
-        640,
-        480,
-        12.0
+        0.0, 10.0, 0.0,     // Camera Position
+        camAxis::Y,         // Camera Rotation
+        "twotri.obj",       // Input file
+        640, 480, 12.0      // Screen dimensions and scale
     };
     const sceneDescriptor flippedScene = {
-        // Camera Positions
-        0.0,
-        -10.0,
-        0.0,
-        // Camera Rotation
-        camAxis::Y,
-        // Input file
-        "twotri.obj",
-        // Screen dimensions and scale
-        640,
-        480,
-        12.0
+        0.0, -10.0, 0.0,    // Camera Position
+        camAxis::Y,         // Camera Rotation
+        "twotri.obj",       // Input file
+        640, 480, 12.0      // Screen dimensions and scale
     };
     const sceneDescriptor bunnyScene = {
-        // Camera Positions
-        -0.02,
-        0.115,
-        3.0,
-        // Camera Rotation
-        camAxis::Z,
-        // Input file
-        "bunny.obj",
-        // Screen dimensions and scale
-        640,
-        480,
-        0.27
+        -0.02, 0.115, 3.0,  // Camera Position
+        camAxis::Z,         // Camera Rotation
+        "bunny.obj",        // Input file
+        640, 480, 0.27      // Screen dimensions and scale
     };
     const sceneDescriptor teapotScene = {
-        // Camera Positions
-        0.15,
-        1.5,
-        -10.0,
-        // Camera Rotation
-        camAxis::Z,
-        // Input file
-        "teapot.obj",
-        // Screen dimensions and scale
-        320,
-        240,
-        7.0
+        0.15, 1.5, -10.0,   // Camera Position
+        camAxis::Z,         // Camera Rotation
+        "teapot.obj",       // Input file
+        320, 240, 7.0       // Screen dimensions and scale
     };
 
     // Begin program
+    // Capstone Requirement 3 - Input/Output
     cout << "SLB Software Rasterizer - CCD.edu CSC1060C03 Capstone Project"
         << endl << endl;
     cout << "Loading default scene..." << endl;
@@ -126,6 +95,8 @@ int main()
 
         case 'R':
         {
+            // Ask user for output filename.
+            // Capstone Requirement 3 - Input/Output
             string outFile = "";
             cout << "Specify output filename (without spaces): ";
             cin >> outFile;
@@ -145,7 +116,7 @@ int main()
     }    
 }
 
-// Interactively ask the user for info to build a new scene
+// Ask the user for info to build a new scene.
 // Capstone Requirement 3 - Input/Output
 sceneDescriptor buildScene()
 {

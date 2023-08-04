@@ -76,6 +76,7 @@ int Rasterizer::writeHeader(ofstream& bmpFile)
 // Capstone Requirement 6 - File I/O
 int Rasterizer::writePixels(ofstream& bmpFile)
 {
+    // Capstone Requirement 4 - Variables
     int byteCount = 0;
 
     // write pixel data for every pixel in the 2d vector

@@ -13,6 +13,8 @@ ProjectedObject::ProjectedObject(SortedObject input, Camera3d camera)
     switch (camera.getRotation()) {
     case camAxis::X:
         // Discard X coordinate in all triangles of object
+        // Capstone Requirement 5 - Arrays
+        // Capstone Requirement 7 - Iteration (loops)
         for (Triangle3d tri : input.getDepthSortedTris())
         {
             // Project each point of the triangle
@@ -27,6 +29,8 @@ ProjectedObject::ProjectedObject(SortedObject input, Camera3d camera)
 
     case camAxis::Y:
         // Discard Y coordinate in all points of object
+        // Capstone Requirement 5 - Arrays
+        // Capstone Requirement 7 - Iteration (loops)
         for (Triangle3d tri : input.getDepthSortedTris())
         {
             // Project each point of the triangle
@@ -41,6 +45,8 @@ ProjectedObject::ProjectedObject(SortedObject input, Camera3d camera)
 
     case camAxis::Z:
         // Discard Z coordinate in all points of object
+        // Capstone Requirement 5 - Arrays
+        // Capstone Requirement 7 - Iteration (loops)
         for (Triangle3d tri : input.getDepthSortedTris())
         {
             // Project each point of the triangle

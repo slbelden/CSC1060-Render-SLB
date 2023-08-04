@@ -9,6 +9,7 @@ RasterGrid::RasterGrid(int width, int height, double screenScale)
     : iwidth(width), iheight(height), iscreenScale(screenScale)
 {
     // Initialize values to all black
+    // Capstone Requirement 5 - Arrays
     values = vector<vector<Pixel>>(height,
         std::vector<Pixel>(width, Pixel(0, 0, 0)));
 }

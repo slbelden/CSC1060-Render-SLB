@@ -7,27 +7,27 @@
 
 Object3d::Object3d(string inFile) : filename(inFile)
 {
-    // local variable declarations
+    // Local variable declarations
     // Capstone Requirement 4 - Variables
     string line;
     vector<Point3d> verts;
 
-    // open file
+    // Open file
     // Capstone Requirement 6 - File I/O
     ifstream objFile;
     objFile.open(filename.c_str());
 
-    // check for valid file
+    // Check for valid file
     if (!objFile.is_open())
     {
         return;
     }
 
-    // process until end of file
+    // Process until end of file
     // Capstone Requirement 7 - Iteration (loops)
     while (!objFile.eof())
     {
-        // read the first character of the line
+        // Read the first character of the line
         // Capstone Requirement 3 - Input/Output
         char next = '#';
         objFile.get(next);
@@ -37,19 +37,19 @@ Object3d::Object3d(string inFile) : filename(inFile)
         // Capstone Requirement 9 - Control
         if (next == 'v')
         {
-            // read vertex coordinates into a new Point3d object
+            // Read vertex coordinates into a new Point3d object
             // Capstone Requirement 3 - Input
             double x, y, z;
             objFile >> x >> y >> z;
             Point3d newPoint(x, y, z);
 
-            // add the new vertex to the array
+            // Add the new vertex to the array
             // Capstone Requirement 5 - Arrays
             verts.push_back(newPoint);
         }
         else if (next == 'f')
         {
-            // read vertex numbers
+            // Read vertex numbers
             // Capstone Requirement 3 - Input
             int a, b, c;
             objFile >> a >> b >> c;
@@ -60,16 +60,16 @@ Object3d::Object3d(string inFile) : filename(inFile)
             // Capstone Requirement 5 - Arrays
             Triangle3d newTri(verts[a - 1], verts[b - 1], verts[c - 1]);
 
-            // add the new triangle to the array
+            // Add the new triangle to the array
             triList.push_back(newTri);
         }
 
-        // after processing, clear the line from input stream
+        // After processing, clear the line from input stream
         string discard;
         getline(objFile, discard);
     }
 
-    // set internal vertex counter,
+    // Set internal vertex counter,
     // since this information will be lost out of this scope
     vertCount = verts.size();
 }
