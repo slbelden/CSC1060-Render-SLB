@@ -2,10 +2,9 @@
 
 // object.h
 // Class for opening, reading, and storing an immutable 3d object
-// 2023-07-31
+// 2023-08-02
 // Stephen L. Belden
 
-#include <cassert>
 #include <fstream>
 #include <string>
 #include <vector>

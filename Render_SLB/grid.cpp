@@ -1,6 +1,9 @@
 #include "grid.h"
 
-// RasterGrid definition
+// grid.cpp
+// Definitions for RasterGrid class
+// 2023-08-03
+// Stephen L. Belden
 
 RasterGrid::RasterGrid(int width, int height, double screenScale)
     : iwidth(width), iheight(height), iscreenScale(screenScale)

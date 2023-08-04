@@ -2,7 +2,7 @@
 
 // triangles.h
 // 3d and 2d classes for immutable triangles
-// 2023-07-31
+// 2023-08-02
 // Stephen L. Belden
 
 #include "points.h"

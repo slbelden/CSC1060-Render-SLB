@@ -1,6 +1,11 @@
 #include "triangles.h"
 
-// Triangle3d definition
+// triangles.cpp
+// Definitions for Triangle3d and Triangle2d classes
+// 2023-08-02
+// Stephen L. Belden
+
+// Triangle3d
 
 Point3d Triangle3d::getVertA()
 {
@@ -19,7 +24,7 @@ Point3d Triangle3d::getVertC()
 
 
 
-// Triangle2d definition
+// Triangle2d
 
 // Barycentric Coordinate System Method referenced from:
 // https://totologic.blogspot.com/2014/01/accurate-point-in-triangle-test.html

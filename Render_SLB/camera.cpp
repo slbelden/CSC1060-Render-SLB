@@ -1,11 +1,9 @@
 #include "camera.h"
 
-// Camera3d definition
-
-Camera3d::Camera3d(Point3d position, camAxis rotation, double scale)
-    : iposition(position), irotation(rotation), iscale(scale)
-{
-}
+// camera.cpp
+// Definitions for Camera3d class
+// 2023-08-03
+// Stephen L. Belden
 
 Point3d Camera3d::getPosition()
 {

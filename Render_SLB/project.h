@@ -2,7 +2,7 @@
 
 // project.h
 // Class for projecting a 3d object onto a 2d plane
-// 2023-07-31
+// 2023-08-02
 // Stephen L. Belden
 
 #include <vector>

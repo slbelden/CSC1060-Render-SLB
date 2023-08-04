@@ -1,6 +1,11 @@
 #include "points.h"
 
-// Point3d definition
+// points.cpp
+// Definitions for Point3d and Point2d classes
+// 2023-07-31
+// Stephen L. Belden
+
+// Point3d
 
 Point3d::Point3d(double X, double Y, double Z)
 {
@@ -26,7 +31,7 @@ double Point3d::getZ()
 
 
 
-// Point2d definition
+// Point2d
 
 Point2d::Point2d(double X, double Y)
 {

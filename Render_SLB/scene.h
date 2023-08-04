@@ -2,7 +2,7 @@
 
 // scene.h
 // Stores and manages all information for rendering one scene
-// 2023-07-31
+// 2023-08-02
 // Stephen L. Belden
 
 #include <iostream>

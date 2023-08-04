@@ -1,6 +1,9 @@
 #include "project.h"
 
-// ProjectedObject definition
+// project.cpp
+// Definitions for ProjectedObject class
+// 2023-08-02
+// Stephen L. Belden
 
 ProjectedObject::ProjectedObject(SortedObject input, Camera3d camera)
 {

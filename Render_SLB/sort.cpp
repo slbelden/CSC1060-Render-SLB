@@ -1,7 +1,9 @@
 #include "sort.h"
 
-// The functionality of this class is implemented in its constructor,
-// the class is intended to be instantiated and immediately used.
+// sort.cpp
+// Definitions for SortedObject class
+// 2023-08-02
+// Stephen L. Belden
 
 SortedObject::SortedObject(Object3d object, Camera3d camera)
 {
@@ -52,12 +54,10 @@ SortedObject::SortedObject(Object3d object, Camera3d camera)
             }
         }
     }
-    // We sorted from least depth to greatest depth. Later we'll need greatest
-    // depth to least depth.
+    // We sorted from least depth to greatest depth.
+    // Later we'll need greatest depth to least depth.
     reverse(depthSortedTris.begin(), depthSortedTris.end());
 }
-
-// Result access function
 
 vector<Triangle3d> SortedObject::getDepthSortedTris() {
     return depthSortedTris;

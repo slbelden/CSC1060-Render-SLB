@@ -1,8 +1,11 @@
 #include "rasterizer.h"
 
-// Rasterizer definition
+// rasterizer.cpp
+// Definitions for Rasterizer class
+// 2023-08-03
+// Stephen L. Belden
 
-// Private helper functions
+// Private Helper Functions
 
 // Write BMP header to the file
 // Standard header implementation referenced from:
@@ -68,11 +71,12 @@ int Rasterizer::writeHeader(ofstream& bmpFile)
     return bytesInHeader;
 }
 
+// Transfer pixel data from RasterGrid result to output file
 int Rasterizer::writePixels(ofstream& bmpFile)
 {
     int byteCount = 0;
 
-    // write pixel data
+    // write pixel data for every pixel in the 2d vector
     for (int row = 0; row < result.getHeight(); row++)
     {
         int rowBytes = 0;
@@ -141,7 +145,7 @@ void Rasterizer::writeBlock(ofstream& bmpFile)
 
 
 
-// Public functions
+// Public Functions
 
 Rasterizer::Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output)
     : result(output)
@@ -150,9 +154,6 @@ Rasterizer::Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output)
     int hitCounter = 0;
     int missCounter = 0;
     int triCounter = 0;
-
-    // Black colored pixel
-    const Pixel black = Pixel(0, 0, 0);
 
     // Determine which camera axes make up the screen
     double screenLocalX = 0.0;
@@ -226,25 +227,10 @@ Rasterizer::Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output)
     }
 
     // Output stats
-    cout << "Rendered " << hitCounter << " colored pixels and " <<
-        missCounter << " backgorund pixels." << endl;
-
-    // In a loop, for each Triangle2d in input, until all tris are read:
-    // Generate a random int value, representing a color for this tri.
-    // In a loop, for each row of the output RasterGrid:
-    // In a loop, for each column of the output RasterGrid:
-    // Get the centerpoint of the current pixel from the
-    // RasterGrid.
-    // Compare that Point2d to the 2d coordinates of the
-    // Triangle2d:
-    // If they intersect, set the value of the RasterGrid
-    // at the current coordinates to the random color for
-    // this Triangle.
-    // If they do not intersect, do nothing.
-}
-
-RasterGrid Rasterizer::getRasterizedGrid() {
-    return result;
+    cout << "Rendered " << triCounter << " out of " <<
+        input.getProjectedTris().size() << " triangles." << endl;
+    cout << "Found " << hitCounter << " pixel-triangle intersections with " <<
+        missCounter << " misses." << endl;
 }
 
 int Rasterizer::saveToBMP(string outfile)
@@ -275,4 +261,8 @@ int Rasterizer::saveToBMP(string outfile)
     bmpFile.close();
 
     return byteCount;
+}
+
+RasterGrid Rasterizer::getRasterizedGrid() {
+    return result;
 }

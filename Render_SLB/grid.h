@@ -2,10 +2,9 @@
 
 // grid.h
 // Class representing the output result, a grid of pixels
-// 2023-07-31
+// 2023-08-03
 // Stephen L. Belden
 
-#include <string>
 #include <vector>
 
 #include "pixel.h"

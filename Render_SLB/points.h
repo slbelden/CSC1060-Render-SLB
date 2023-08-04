@@ -6,9 +6,6 @@
 // Stephen L. Belden
 
 // Class for storing and using a point in 3d space.
-// This class is also used for rotation, because a separate rotation class
-// would be implemented identically. Rotation can be considered a vector from
-// the origin pointing to the Point3d.
 class Point3d
 {
 private:

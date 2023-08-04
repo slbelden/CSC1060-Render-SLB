@@ -2,7 +2,7 @@
 
 // sort.h
 // Class for sorting triangles by depth relative to a camera
-// 2023-07-31
+// 2023-08-02
 // Stephen L. Belden
 
 #include <vector>
@@ -25,7 +25,7 @@ public:
     // the class is intended to be instantiated and immediately used.
     SortedObject(Object3d object, Camera3d camera);
 
-    // Result access function
+    // Result access functions
     vector<Triangle3d> getDepthSortedTris();
     size_t getSortedTrisCount();
     int getSortingSteps();

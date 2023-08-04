@@ -1,6 +1,6 @@
 #pragma once
 
-// triangles.h
+// pixel.h
 // Class defining an 8-bit color RGB pixel
 // 2023-08-03
 // Stephen L. Belden

@@ -1,6 +1,9 @@
 #include "pixel.h"
 
-// Pixel definition
+// pixel.cpp
+// Definitions for Pixel class
+// 2023-08-03
+// Stephen L. Belden
 
 Pixel::Pixel(int randBrightFloor)
 {

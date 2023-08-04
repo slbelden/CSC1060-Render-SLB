@@ -1,6 +1,9 @@
 #include "scene.h"
 
-// Scene definitions
+// scene.cpp
+// Definitions for Scene class
+// 2023-08-02
+// Stephen L. Belden
 
 string Scene::getInfoBlockText()
 {
@@ -45,7 +48,7 @@ void Scene::renderToFile(string outFile)
 	// Project
 	ProjectedObject projection = ProjectedObject(sortObj, cam);
 	cout << "Projected " << projection.getProjectedTris().size() * 3 <<
-		" 3d points into 2d orthogonal to the " <<
+		" 3d points into 2d space orthogonal to the " <<
 		((cam.getRotation() == camAxis::X) ? "X" :
 			(cam.getRotation() == camAxis::Y) ? "Y" : "Z") << " axis." << endl;
 

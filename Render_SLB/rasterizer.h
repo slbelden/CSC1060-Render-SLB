@@ -30,9 +30,9 @@ public:
     // the class is intended to be instantiated and immediately used.
     Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output);
 
-    // Result access function
-    RasterGrid getRasterizedGrid();
-
     // Final output function, returns number of bytes written
     int saveToBMP(string outfile);
+
+    // Result access function
+    RasterGrid getRasterizedGrid();
 };
