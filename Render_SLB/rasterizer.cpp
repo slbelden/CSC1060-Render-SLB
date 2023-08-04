@@ -18,7 +18,10 @@ int Rasterizer::writeHeader(ofstream& bmpFile)
     // Bitmap file size in bytes
     const uint32_t bytesInHeader = 54;
     const uint32_t bytesPerPixel = 3;
-    uint32_t bytesInBody = result.getWidth() * result.getHeight() * bytesPerPixel;
+    // Each row is padded out to a multiple of 4 bytes.
+    uint32_t bytesInRow = result.getWidth() * bytesPerPixel;
+    while (bytesInRow % 4 > 0) bytesInRow++;
+    uint32_t bytesInBody = bytesInRow * result.getHeight();
     uint32_t size = bytesInHeader + bytesInBody;
     bmpFile.write((char*)&size, sizeof(uint32_t));
 
@@ -67,9 +70,13 @@ int Rasterizer::writeHeader(ofstream& bmpFile)
 
 int Rasterizer::writePixels(ofstream& bmpFile)
 {
+    int byteCount = 0;
+
     // write pixel data
     for (int row = 0; row < result.getHeight(); row++)
     {
+        int rowBytes = 0;
+
         for (int col = 0; col < result.getWidth(); col++)
         {
             unsigned char red = result.getValue(row, col).getRed();
@@ -78,16 +85,34 @@ int Rasterizer::writePixels(ofstream& bmpFile)
             bmpFile.write((char*)&red, sizeof(uint8_t));
             bmpFile.write((char*)&gre, sizeof(uint8_t));
             bmpFile.write((char*)&blu, sizeof(uint8_t));
+
+            rowBytes += 3;
+            byteCount += 3;
+        }
+
+        // The length of each row of a valid BMP file must be a multiple of 4
+        // bytes. Add null chars (bytes) to reach that multiple.
+        while(rowBytes % 4 > 0)
+        {
+            writePadByte(bmpFile);
+            rowBytes++;
+            byteCount++;
         }
     }
 
-    int numberOfPixels = result.getWidth() * result.getHeight();
-    return numberOfPixels * 3;
+    return byteCount;
 }
 
+// Write a single padding byte to the end of the file
+void Rasterizer::writePadByte(ofstream& bmpFile)
+{
+    unsigned char blank = 0u;
+    bmpFile.write((char*)&blank, sizeof(uint8_t));
+}
+
+// Testing function: write pixel data to upper left quarter of screen
 void Rasterizer::writeBlock(ofstream& bmpFile)
 {
-    // write pixel data to upper left quarter of screen
     for (int row = 0; row < result.getHeight(); row++)
     {
         for (int col = 0; col < result.getWidth(); col++)
