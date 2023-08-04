@@ -7,33 +7,40 @@
 
 SortedObject::SortedObject(Object3d object, Camera3d camera)
 {
-    // parallel array alongside vector<Triangle3d> depthSortedTris;
+    // Parallel array alongside vector<Triangle3d> depthSortedTris;
+    // Capstone Requirement 5 - Arrays
     vector<double> triDepths;
 
+    // Sort every triangle in the list
+    // Capstone Requirement 7 - Iteration (loops)
     for (Triangle3d tri : object.getTriList())
     {
-        // calculate average position of triangle's verticies
+        // Calculate average position of triangle's verticies
         double xAvg = (tri.getVertA().getX() + tri.getVertB().getX() + tri.getVertC().getX()) / 3;
         double yAvg = (tri.getVertA().getY() + tri.getVertB().getY() + tri.getVertC().getY()) / 3;
         double zAvg = (tri.getVertA().getZ() + tri.getVertB().getZ() + tri.getVertC().getZ()) / 3;
 
-        // calculate distance from camera using 3d Pythagorean theorem
+        // Calculate distance from camera using 3d Pythagorean theorem
         double sideX = xAvg - camera.getPosition().getX();
         double sideY = yAvg - camera.getPosition().getY();
         double sideZ = zAvg - camera.getPosition().getZ();
         double hypotenuse = sqrt((sideX * sideX) + (sideY * sideY) + (sideZ * sideZ));
 
-        // add current element to end of parallel lists
-        // this creates room for the insertion sort shifting in the next loop
+        // Add current element to end of parallel lists,
+        // this creates room for the insertion sort shifting in the next loop.
+        // Capstone Requirement 5 - Arrays
         depthSortedTris.push_back(tri);
         triDepths.push_back(hypotenuse);
         steps++;
 
-        // shift into correct place in list based on calculated distance
+        // Shift into correct place in list based on calculated distance
+        // Capstone Requirement 7 - Iteration (loops)
         for (size_t i = depthSortedTris.size() - 1; i > 0; i--)
         {
-            // starting at the back of the list, shift deeper elements right
-            // until the proper place for the current element is found
+            // Starting at the back of the list, shift deeper elements right
+            // until the proper place for the current element is found.
+            // Capstone Requirement 5 - Arrays
+            // Capstone Requirement 9 - Control
             if (triDepths[i - 1] > hypotenuse)
             {
                 // shift
@@ -49,7 +56,7 @@ SortedObject::SortedObject(Object3d object, Camera3d camera)
             }
             else
             {
-                // element has been moved to is correct place, we're done
+                // Element has been moved to is correct place, we're done
                 break;
             }
         }

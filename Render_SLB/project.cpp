@@ -9,6 +9,7 @@ ProjectedObject::ProjectedObject(SortedObject input, Camera3d camera)
 {
     // Projecting from 3d to 2d involves discarding one 3d axis,
     // the camera rotation defines which axis to remove.
+    // Capstone Requirement 9 - Control
     switch (camera.getRotation()) {
     case camAxis::X:
         // Discard X coordinate in all triangles of object

@@ -5,11 +5,8 @@
 // 2023-08-02
 // Stephen L. Belden
 
-Object3d::Object3d(string inFile)
+Object3d::Object3d(string inFile) : filename(inFile)
 {
-    // set class private variable
-    filename = inFile;
-
     // local variable declarations
     // Capstone Requirement 4 - Variables
     string line;
@@ -31,6 +28,7 @@ Object3d::Object3d(string inFile)
     while (!objFile.eof())
     {
         // read the first character of the line
+        // Capstone Requirement 3 - Input/Output
         char next = '#';
         objFile.get(next);
 

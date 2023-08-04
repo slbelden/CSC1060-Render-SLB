@@ -10,6 +10,7 @@
 // Write BMP header to the file
 // Standard header implementation referenced from:
 // https://dev.to/muiz6/c-how-to-write-a-bitmap-image-from-scratch-1k6m
+// Capstone Requirement 6 - File I/O
 int Rasterizer::writeHeader(ofstream& bmpFile)
 {
     // Bitmap signature bytes
@@ -72,11 +73,13 @@ int Rasterizer::writeHeader(ofstream& bmpFile)
 }
 
 // Transfer pixel data from RasterGrid result to output file
+// Capstone Requirement 6 - File I/O
 int Rasterizer::writePixels(ofstream& bmpFile)
 {
     int byteCount = 0;
 
     // write pixel data for every pixel in the 2d vector
+    // Capstone Requirement 7 - Iteration (loops)
     for (int row = 0; row < result.getHeight(); row++)
     {
         int rowBytes = 0;
@@ -108,6 +111,7 @@ int Rasterizer::writePixels(ofstream& bmpFile)
 }
 
 // Write a single padding byte to the end of the file
+// Capstone Requirement 3 - Input/Output
 void Rasterizer::writePadByte(ofstream& bmpFile)
 {
     unsigned char blank = 0u;
@@ -155,9 +159,11 @@ Rasterizer::Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output)
     int missCounter = 0;
     int triCounter = 0;
 
-    // Determine which camera axes make up the screen
     double screenLocalX = 0.0;
     double screenLocalY = 0.0;
+
+    // Determine which camera axes make up the screen
+    // Capstone Requirement 9 - Control
     switch (cam.getRotation()) {
     case camAxis::X:
         screenLocalX = cam.getPosition().getY();
@@ -176,6 +182,7 @@ Rasterizer::Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output)
     }
 
     // Give feedback to the user
+    // Capstone Requirement 3 - Input/Output
     Point2d topLeft = result.getGridPointOffsets(0, 0);
     Point2d botRight = result.getGridPointOffsets(result.getWidth(), result.getHeight());
     cout << "Rasterizing screen from (" <<
@@ -185,9 +192,11 @@ Rasterizer::Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output)
         screenLocalY + botRight.getY() << ")" << endl;
 
     // Rasterize each Triangle from back to front
+    // Capstone Requirement 7 - Iteration (loops)
     for (Triangle2d& tri : input.getProjectedTris())
     {
         // Give occasional feedback to the user
+        // Capstone Requirement 3 - Input/Output
         if (triCounter % 250 == 0)
         {
             cout << "Rendered " << triCounter << " out of " <<
@@ -199,6 +208,7 @@ Rasterizer::Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output)
         Pixel color = Pixel(100);
 
         // Check every pixel in the grid
+        // Capstone Requirement 7 - Iteration (loops)
         for (int row = 0; row < result.getHeight(); row++)
         {
             for (int col = 0; col < result.getWidth(); col++)
@@ -211,6 +221,7 @@ Rasterizer::Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output)
 
                 // Test for intersection with triangle at current pixel and
                 // set pixel color according to intersection test.
+                // Capstone Requirement 9 - Control
                 if (tri.pointIsInTri(screenPoint))
                 {
                     result.setValue(row, col, color);
@@ -227,6 +238,7 @@ Rasterizer::Rasterizer(Camera3d cam, ProjectedObject input, RasterGrid output)
     }
 
     // Output stats
+    // Capstone Requirement 3 - Input/Output
     cout << "Rendered " << triCounter << " out of " <<
         input.getProjectedTris().size() << " triangles." << endl;
     cout << "Found " << hitCounter << " pixel-triangle intersections with " <<

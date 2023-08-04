@@ -146,6 +146,7 @@ int main()
 }
 
 // Interactively ask the user for info to build a new scene
+// Capstone Requirement 3 - Input/Output
 sceneDescriptor buildScene()
 {
     sceneDescriptor newScene;
@@ -181,6 +182,7 @@ sceneDescriptor buildScene()
 }
 
 // Return a string containing n copies of c
+// Capstone Requirement 7 - Iteration (loops)
 string bunchOfChars(char c, int n)
 {
     string result = "";
@@ -194,6 +196,7 @@ string bunchOfChars(char c, int n)
 }
 
 // Present the user with options and return only one choice
+// Capstone Requirement 3 - Input/Output
 char menuPrompt()
 {
     char c;
@@ -219,6 +222,7 @@ char menuPrompt()
 }
 
 // Show info about the currently loaded scene to the user in a formated block
+// Capstone Requirement 3 - Input/Output
 void printSceneInfo(Scene& scene)
 {
     cout << bunchOfChars('#', 24) << " Scene Info "
