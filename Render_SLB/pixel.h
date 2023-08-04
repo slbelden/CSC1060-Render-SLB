@@ -20,7 +20,8 @@ private:
 
 public:
 	// Immutable. Standard constructor.
-	Pixel(char r, char g, char b) : red(r), gre(g), blu(b) {};
+	Pixel(unsigned char r, unsigned char g, unsigned char b)
+		: red(r), gre(g), blu(b) {};
 
 	// Random constructor
 	Pixel(int randBrightFloor);
