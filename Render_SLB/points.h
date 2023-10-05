@@ -37,6 +37,6 @@ public:
     Point2d(double X = 0.0, double Y = 0.0);
 
     // Member access functions
-    double getX();
-    double getY();
+    double getX() const;
+    double getY() const;
 };

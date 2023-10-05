@@ -28,7 +28,7 @@ Point3d Triangle3d::getVertC()
 
 // Barycentric Coordinate System Method referenced from:
 // https://totologic.blogspot.com/2014/01/accurate-point-in-triangle-test.html
-bool Triangle2d::pointIsInTri(Point2d p)
+bool Triangle2d::pointIsInTri(const Point2d &p)
 {
     // local declarations, for brevity below
     const double x1 = iA.getX();

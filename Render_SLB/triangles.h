@@ -40,7 +40,7 @@ public:
     Triangle2d(Point2d A, Point2d B, Point2d C) : iA(A), iB(B), iC(C) {};
 
     // Intersection test
-    bool pointIsInTri(Point2d p);
+    bool pointIsInTri(const Point2d &p);
 
     // Member access functions
     Point2d getVertA();

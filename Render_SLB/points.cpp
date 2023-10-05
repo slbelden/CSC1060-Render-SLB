@@ -39,12 +39,12 @@ Point2d::Point2d(double X, double Y)
     iY = Y;
 }
 
-double Point2d::getX()
+double Point2d::getX() const
 {
     return iX;
 }
 
-double Point2d::getY()
+double Point2d::getY() const
 {
     return iY;
 }
